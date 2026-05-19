@@ -48,6 +48,29 @@ docs/
 └── quick-start.md                      # 本文档
 ```
 
+## 本地依赖启动前检查
+
+启动后端服务前，先确认 `bootstrap/src/main/resources/application.yaml` 中的默认依赖已经准备好。
+
+| 依赖 | 默认地址 / 配置 | 检查点 |
+|---|---|---|
+| PostgreSQL | `127.0.0.1:5432`，数据库 `ragent`，用户名/密码 `postgres`/`postgres` | 已创建 `ragent` 数据库，并执行 `resources/database/schema_pg.sql` 和 `resources/database/init_data_pg.sql`。 |
+| Redis | `127.0.0.1:6379`，密码 `123456` | Redis 已启动，密码与配置一致。 |
+| RocketMQ | NameServer `127.0.0.1:9876` | NameServer 和 Broker 已启动，生产者组使用默认配置即可。 |
+| RustFS / S3 | `http://localhost:9000`，默认 AK/SK 为 `rustfsadmin`/`rustfsadmin` | 对象存储服务已启动，上传文档时可访问。 |
+| MCP Server | `http://localhost:9099` | 如需 MCP 工具调用，先启动 `mcp-server` 模块。 |
+| Milvus（可选） | `http://localhost:19530` | 只有将 `rag.vector.type` 改为 `milvus` 时才需要启动。默认 `pg` 使用 PostgreSQL 向量存储。 |
+| Ollama（可选） | `http://localhost:11434` | 只有使用本地 Chat 或 Embedding 候选模型时需要启动并准备模型。 |
+| AI Provider Keys | `BAILIAN_API_KEY`、`SILICONFLOW_API_KEY` | 使用百炼或 SiliconFlow 模型前，确保环境变量已设置。 |
+
+常用启动顺序：
+
+1. 启动 PostgreSQL、Redis、RocketMQ 和 RustFS。
+2. 初始化 PostgreSQL 数据库脚本。
+3. 按需启动 MCP Server：`./mvnw -pl mcp-server spring-boot:run`。
+4. 启动主服务：`./mvnw -pl bootstrap spring-boot:run`。
+5. 启动前端并确认 `VITE_API_BASE_URL` 指向主服务地址。
+
 ## 工作原理
 
 ### 1. 检索流程
