@@ -131,6 +131,13 @@ Backend responses using a `{ code, message, data }` shape are unwrapped by the A
 
 A daily contribution task plan is maintained in `docs/weekly-contribution-plan.md`.
 
+## Git contribution identity
+
+Use the following Git identity for contribution commits in this repository:
+
+- GitHub username: `lcoudy`
+- Git author email: `1020246530@qq.com`
+
 When asked to continue the contribution plan or complete the next daily task:
 
 1. Read `docs/weekly-contribution-plan.md` and pick the first task whose status is `Todo`, unless the user specifies a day.
