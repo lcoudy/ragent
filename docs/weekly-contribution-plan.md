@@ -24,7 +24,7 @@ test: cover ingestion pipeline validation
 | 1 | Done | docs | `docs: clarify local dependency setup` | 梳理 README、CLAUDE.md 和配置文件中的本地依赖说明，补充 PostgreSQL、Redis、RocketMQ、RustFS、AI Key 的启动前检查清单。 |
 | 2 | Done | docs | `docs: align ingestion API examples with service port` | 检查文档中的 `/api/ragent` 接口示例端口是否与项目默认端口一致，把不一致的示例统一或注明差异。 |
 | 3 | Done | docs | `docs: add backend module reading guide` | 增加一段后端源码阅读路线，说明 `bootstrap`、`framework`、`infra-ai`、`mcp-server` 分别适合从哪些入口开始看。 |
-| 4 | Todo | docs | `docs: explain multi-channel retrieval flow` | 在多通道检索文档中补充更清晰的执行时序，说明意图定向检索、全局向量检索、去重和 Rerank 的关系。 |
+| 4 | Done | docs | `docs: explain multi-channel retrieval flow` | 在多通道检索文档中补充更清晰的执行时序，说明意图定向检索、全局向量检索、去重和 Rerank 的关系。 |
 | 5 | Todo | docs | `docs: add ingestion pipeline troubleshooting notes` | 为文档摄取 Pipeline 补充常见问题排查说明，例如循环依赖、节点不存在、无起始节点、任务失败后的检查路径。 |
 | 6 | Todo | test | `test: cover ingestion pipeline validation errors` | 查找入库 Pipeline 校验逻辑，补充循环依赖、缺失节点、无起始节点等边界场景的单元测试。 |
 | 7 | Todo | docs | `docs: add frontend startup notes` | 补充前端启动说明，包括 Node/npm 依赖、`VITE_API_BASE_URL`、本地后端地址和常见登录跳转问题。 |

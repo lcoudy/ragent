@@ -145,6 +145,46 @@ public List<RetrievedChunk> retrieveKB(List<SubQuestionIntent> subIntents, int t
 }
 ```
 
+## 执行时序
+
+`MultiChannelRetrievalEngine#retrieveKnowledgeChannels` 会先把子问题意图和 `topK` 封装为 `SearchContext`，再进入“通道召回 → 合并去重 → 精排截断”的流程：
+
+```
+SubQuestionIntent 列表 + topK
+    ↓
+构建 SearchContext
+    ↓
+按 isEnabled(context) 过滤通道，并按 priority 排序
+    ↓
+CompletableFuture 并行执行已启用通道
+    ├─→ IntentDirectedSearchChannel（priority=1）
+    │     └─ 过滤 KB 意图节点，按目标知识库并行召回 topK * intent.top-k-multiplier 个候选
+    └─→ VectorGlobalSearchChannel（priority=10）
+          └─ 在全量 KB collection 中召回 topK * vector-global.top-k-multiplier 个兜底候选
+    ↓
+合并所有 SearchChannelResult 中的 Chunk
+    ↓
+DeduplicationPostProcessor（order=1）
+    └─ 按 Chunk id / 内容哈希去重，重复时保留更高分结果
+    ↓
+RerankPostProcessor（order=10）
+    └─ 使用 Rerank 模型按主问题重排，并输出最终 topK
+```
+
+### 意图定向检索与全局向量检索的关系
+
+- **意图定向检索是主路径**：当意图识别结果中存在达到 `intent-directed.min-intent-score` 的 KB 意图时启用，优先在这些意图对应的知识库中召回候选，适合用户问题已经能明确落到某些知识库节点的场景。
+- **全局向量检索是兜底和补充路径**：当没有识别出意图、最高意图分数低于 `vector-global.confidence-threshold`，或只有一个中等置信度意图且分数低于 `single-intent-supplement-threshold` 时启用。它会遍历所有未删除知识库的 collection，避免意图识别遗漏导致无召回。
+- **两类通道可以同时启用**：例如只有一个中等置信度 KB 意图时，意图定向检索先在目标知识库内召回，全局检索同时补充跨知识库候选。引擎会等待所有启用通道完成，再统一进入后置处理链。
+- **通道失败不阻断整体检索**：单个通道抛出异常时会被转换为空结果，其他通道的结果仍会继续参与后续处理。
+
+### 去重与 Rerank 的关系
+
+后置处理器按 `order` 串行执行。当前实现中，`DeduplicationPostProcessor` 的 `order=1`，`RerankPostProcessor` 的 `order=10`，因此先去重、再精排：
+
+1. **去重阶段**：把各通道结果摊平成一个候选列表，再按通道类型优先级处理：`INTENT_DIRECTED` 优先于 `KEYWORD_ES`，`KEYWORD_ES` 优先于 `VECTOR_GLOBAL`。同一 Chunk 重复出现时，根据 Chunk `id`（没有 id 时使用文本哈希）识别重复项，并保留分数更高的版本。
+2. **Rerank 阶段**：对去重后的候选集合调用 `RerankService#rerank`，以 `SearchContext#getMainQuestion()` 作为查询文本，最终返回 `context.topK` 个结果。这样可以让 Rerank 只处理合并后的有效候选，减少重复内容对精排和最终上下文的干扰。
+
 ## 配置说明
 
 配置文件：`application-search.yml`

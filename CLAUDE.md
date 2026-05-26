@@ -130,6 +130,7 @@ Backend responses using a `{ code, message, data }` shape are unwrapped by the A
 ## Contribution plan workflow
 
 A daily contribution task plan is maintained in `docs/weekly-contribution-plan.md`.
+A repository progress log is maintained in `process.md`.
 
 ## Git contribution identity
 
@@ -140,11 +141,13 @@ Use the following Git identity for contribution commits in this repository:
 
 When asked to continue the contribution plan or complete the next daily task:
 
-1. Read `docs/weekly-contribution-plan.md` and pick the first task whose status is `Todo`, unless the user specifies a day.
-2. Implement a real, useful change that matches the selected task.
-3. Prefer small, independent changes that can be committed separately.
-4. Update the selected task status from `Todo` to `Done` after the work is complete.
-5. Run the most relevant lightweight checks when practical.
-6. Only create a git commit if the user explicitly asks to commit.
+1. Read `process.md` and `docs/weekly-contribution-plan.md` to understand the current progress.
+2. Pick the first task whose status is `Todo`, unless the user specifies a day.
+3. Implement a real, useful change that matches the selected task.
+4. Prefer small, independent changes that can be committed separately.
+5. Update the selected task status from `Todo` to `Done` after the work is complete.
+6. Update `process.md` with completed work, recent commit information when applicable, and the next planned task.
+7. Run the most relevant lightweight checks when practical.
+8. After completing and checking a daily task, create a focused git commit and push it to the configured remote by default, unless the user explicitly asks not to commit or not to push.
 
 Do not create empty commits or meaningless timestamp-only changes for contribution activity.
