@@ -8,8 +8,8 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 提交邮箱：`1020246530@qq.com`
-- 当前贡献计划进度：Day 1 - Day 5 已完成，下一项为 Day 6。
-- 当前未提交改动：无，Day 5 文档改动已按默认流程提交并推送。
+- 当前贡献计划进度：Day 1 - Day 6 已完成，下一项为 Day 7。
+- 当前未提交改动：无，Day 6 测试改动已按默认流程提交。
 
 ## 已完成任务
 
@@ -20,10 +20,12 @@
 | 3 | Done | `71ebf81` | 新增 `docs/backend-module-reading-guide.md`，说明 `bootstrap`、`framework`、`infra-ai`、`mcp-server` 的后端源码阅读路线，并在 README 快速导航中增加入口。 |
 | 4 | Done | `docs: explain multi-channel retrieval flow` | 在 `docs/multi-channel-retrieval.md` 补充多通道检索执行时序，说明意图定向检索、全局向量检索、去重和 Rerank 的关系。 |
 | 5 | Done | `docs: add ingestion pipeline troubleshooting notes` | 新增文档摄取 Pipeline 排查指南，覆盖环路、节点缺失、起点缺失、节点类型和任务节点日志检查路径，并在 README 快速导航中增加入口。 |
+| 6 | Done | `test: cover ingestion pipeline validation errors` | 新增 IngestionEngine Pipeline 校验单元测试，覆盖循环依赖、缺失节点、无起始节点和校验失败日志初始化行为。 |
 
 ## 最近提交
 
 ```text
+test: cover ingestion pipeline validation errors
 docs: add ingestion pipeline troubleshooting notes
 docs: explain multi-channel retrieval flow
 71ebf81 docs: add backend module reading guide
@@ -35,21 +37,21 @@ docs: explain multi-channel retrieval flow
 
 优先从 `docs/weekly-contribution-plan.md` 中选择第一个 `Todo` 任务：
 
-- 优先继续 Day 6 测试任务，先确认 Maven 测试可运行，再补充 Pipeline 校验错误场景。
+- 优先继续 Day 7 文档任务，补充前端启动说明、API 地址配置和登录跳转排查。
 
 | Day | 类型 | 建议提交信息 | 任务说明 |
 |---|---|---|---|
-| 6 | test | `test: cover ingestion pipeline validation errors` | 查找入库 Pipeline 校验逻辑，补充循环依赖、缺失节点、无起始节点等边界场景的单元测试。 |
 | 7 | docs | `docs: add frontend startup notes` | 补充前端启动说明，包括 Node/npm 依赖、`VITE_API_BASE_URL`、本地后端地址和常见登录跳转问题。 |
+| 8 | docs | `docs: document model routing failover behavior` | 阅读 `infra-ai` 中模型路由、健康检查、熔断降级相关代码，为文档补充核心流程说明。 |
 
 ## 下一次执行建议
 
 1. 先运行 `git status -sb`，确认工作区是否干净。
 2. 阅读 `docs/weekly-contribution-plan.md` 和本文件，确认下一个任务。
-3. 如果继续 Day 6，重点查看：
-   - `bootstrap/src/main/java/com/nageoffer/ai/ragent/ingestion/engine/IngestionEngine.java`
-   - `bootstrap/src/main/java/com/nageoffer/ai/ragent/ingestion/domain/pipeline/`
-   - 现有测试目录和测试依赖，补充 Pipeline 校验错误的单元测试
+3. 如果继续 Day 7，重点查看：
+   - `frontend/package.json`
+   - `frontend/src/services/api.ts`
+   - `README.md` 中的前端启动和接口地址说明
 4. 完成后更新：
    - 对应文档内容
    - `docs/weekly-contribution-plan.md` 中的任务状态
