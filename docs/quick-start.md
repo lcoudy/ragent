@@ -69,7 +69,7 @@ docs/
 2. 初始化 PostgreSQL 数据库脚本。
 3. 按需启动 MCP Server：`./mvnw -pl mcp-server spring-boot:run`。
 4. 启动主服务：`./mvnw -pl bootstrap spring-boot:run`。
-5. 启动前端并确认 `VITE_API_BASE_URL` 指向主服务地址。
+5. 启动前端并确认 `VITE_API_BASE_URL` 指向主服务地址，详见 [前端启动与接口地址配置](./frontend-startup.md)。
 
 ## 工作原理
 
