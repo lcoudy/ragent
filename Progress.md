@@ -10,8 +10,8 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 9
-- 下一项任务：Day 10，`docs: add MCP server usage notes`
+- 已完成贡献任务：Day 1 到 Day 10
+- 下一项任务：Day 11，`docs: add database initialization guide`
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
 ## 每日贡献规则
@@ -62,20 +62,27 @@ git checkout -b contribution-queue
 | 7 | Done | `7ed1f60` | 新增前端启动说明，覆盖 Node/npm、`VITE_API_BASE_URL`、本地后端地址、Vite 代理和登录跳转。 |
 | 8 | Done | `fed1bb8` | 补充模型路由与故障切换说明，覆盖候选选择、健康状态、流式首包探测和排查路径。 |
 | 9 | Done | `1137aad` | 新增检索结果去重测试，覆盖重复 chunk id、跨通道相同文本和空通道结果。 |
+| 10 | Done | `queued` | 新增 MCP server 使用说明，覆盖启动方式、默认 endpoint、示例工具、主服务配置和工具发现调用链路。 |
 
 ## 待完成任务
 
 | Day | 状态 | 类型 | 建议提交信息 | 任务 |
 |---|---|---|---|---|
-| 10 | Todo | docs | `docs: add MCP server usage notes` | 补充 MCP server 的启动方式、默认端口、示例工具、endpoint 路径，以及主服务如何发现和调用 MCP 工具。 |
 | 11 | Todo | docs | `docs: add database initialization guide` | 基于 `resources/database/` 整理 PostgreSQL 初始化说明，包括 schema/data 脚本、升级顺序和常见问题。 |
 | 12 | Todo | docs | `docs: add RAG trace reading guide` | 结合后端 Trace 记录和管理后台，说明如何理解一次 RAG 请求的链路追踪。 |
 | 13 | Todo | test | `test: cover search channel enablement rules` | 为检索通道启用规则补充测试，例如低置信度意图回退和意图定向检索优先级。 |
 | 14 | Todo | docs | `docs: add contribution-friendly task list` | 整理适合初学者继续贡献的任务清单，包括文档、测试、小型 bugfix 和前端体验优化。 |
+| 15 | Todo | docs | `docs: add model provider configuration guide` | 整理聊天、Embedding、Rerank 模型供应商的配置项、默认模型、环境变量和常见配置错误。 |
+| 16 | Todo | test | `test: cover model routing fallback behavior` | 为模型路由故障切换补充轻量测试，覆盖候选模型失败后继续尝试下一个模型的行为。 |
+| 17 | Todo | docs | `docs: add knowledge base operation guide` | 补充知识库、文档、分块和定时刷新相关接口的使用说明，帮助定位前后端功能入口。 |
+| 18 | Todo | docs | `docs: add retrieval troubleshooting guide` | 整理检索无结果、结果不准、Rerank 未生效、向量库配置错误等常见排查路径。 |
+| 19 | Todo | test | `test: cover query rewrite utility behavior` | 为问题重写或术语映射工具补充边界测试，覆盖空输入、无匹配映射和多映射命中的情况。 |
+| 20 | Todo | docs | `docs: add resume-oriented project summary` | 以简历复盘为目标，总结项目架构、核心链路、可讲亮点、个人贡献记录和后续改造方向。 |
 
 ## 最近提交
 
 ```text
+queued docs: add MCP server usage notes
 1137aad test: cover retrieval deduplication behavior
 fed1bb8 docs: document model routing failover behavior
 7ed1f60 docs: add frontend startup notes
@@ -89,12 +96,12 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-Day 10 建议重点查看：
+Day 11 建议重点查看：
 
-- `mcp-server/`
-- `mcp-server/src/main/java/com/nageoffer/ai/ragent/mcp/config/McpServerConfig.java`
-- `mcp-server/src/main/java/com/nageoffer/ai/ragent/mcp/executor/`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/mcp/`
+- `resources/database/schema_pg.sql`
+- `resources/database/init_data_pg.sql`
+- `resources/database/upgrade_v1.0_to_v1.1.sql`
+- `resources/database/upgrade_v1.1_to_v1.2.sql`
 - `bootstrap/src/main/resources/application.yaml`
 
-预期产出：一篇聚焦 MCP server 使用方式的文档；如合适，同步在 README 快速导航中增加入口。
+预期产出：一篇聚焦 PostgreSQL 初始化、初始化数据、升级脚本顺序和常见问题的文档；如合适，同步在 README 快速导航中增加入口。
