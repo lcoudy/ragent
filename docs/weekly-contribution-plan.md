@@ -29,7 +29,7 @@ test: cover ingestion pipeline validation
 | 6 | Done | test | `test: cover ingestion pipeline validation errors` | 查找入库 Pipeline 校验逻辑，补充循环依赖、缺失节点、无起始节点等边界场景的单元测试。 |
 | 7 | Done | docs | `docs: add frontend startup notes` | 补充前端启动说明，包括 Node/npm 依赖、`VITE_API_BASE_URL`、本地后端地址和常见登录跳转问题。 |
 | 8 | Done | docs | `docs: document model routing failover behavior` | 阅读 `infra-ai` 中模型路由、健康检查、熔断降级相关代码，为文档补充核心流程说明。 |
-| 9 | Todo | test | `test: cover retrieval deduplication behavior` | 查找检索结果去重处理器，为重复 chunk、不同通道相同 chunk、空结果等场景补充测试。 |
+| 9 | Done | test | `test: cover retrieval deduplication behavior` | 查找检索结果去重处理器，为重复 chunk、不同通道相同 chunk、空结果等场景补充测试。 |
 | 10 | Todo | docs | `docs: add MCP server usage notes` | 补充 MCP server 的启动方式、默认端口、示例工具和主服务如何调用 MCP server 的说明。 |
 | 11 | Todo | docs | `docs: add database initialization guide` | 基于 `resources/database/` 下的脚本，整理 PostgreSQL 初始化、升级脚本执行顺序和注意事项。 |
 | 12 | Todo | docs | `docs: add RAG trace reading guide` | 阅读 Trace 相关代码和管理后台说明，补充如何理解一次 RAG 请求的链路追踪记录。 |

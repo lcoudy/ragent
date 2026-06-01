@@ -8,8 +8,8 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 提交邮箱：`1020246530@qq.com`
-- 当前贡献计划进度：Day 1 - Day 8 已完成，下一项为 Day 9。
-- 当前未提交改动：无，Day 8 文档改动已按默认流程提交。
+- 当前贡献计划进度：Day 1 - Day 9 已完成，下一项为 Day 10。
+- 当前未提交改动：无，Day 9 测试改动已按默认流程提交。
 
 ## 已完成任务
 
@@ -23,10 +23,12 @@
 | 6 | Done | `test: cover ingestion pipeline validation errors` | 新增 IngestionEngine Pipeline 校验单元测试，覆盖循环依赖、缺失节点、无起始节点和校验失败日志初始化行为。 |
 | 7 | Done | `docs: add frontend startup notes` | 新增前端启动与接口地址配置说明，覆盖 Node/npm、`VITE_API_BASE_URL`、本地后端地址、Vite 代理和登录跳转排查。 |
 | 8 | Done | `docs: document model routing failover behavior` | 新增模型路由与故障切换说明，覆盖候选选择、同步降级、三态熔断、流式首包探测和常见排查路径。 |
+| 9 | Done | `test: cover retrieval deduplication behavior` | 新增检索结果去重单元测试，覆盖重复 chunk id 保留最高分、不同通道相同文本去重和空通道结果。 |
 
 ## 最近提交
 
 ```text
+test: cover retrieval deduplication behavior
 docs: document model routing failover behavior
 docs: add frontend startup notes
 test: cover ingestion pipeline validation errors
@@ -41,21 +43,21 @@ docs: explain multi-channel retrieval flow
 
 优先从 `docs/weekly-contribution-plan.md` 中选择第一个 `Todo` 任务：
 
-- 优先继续 Day 9 测试任务，补充检索结果去重行为测试。
+- 优先继续 Day 10 文档任务，补充 MCP server 使用说明。
 
 | Day | 类型 | 建议提交信息 | 任务说明 |
 |---|---|---|---|
-| 9 | test | `test: cover retrieval deduplication behavior` | 查找检索结果去重处理器，为重复 chunk、不同通道相同 chunk、空结果等场景补充测试。 |
 | 10 | docs | `docs: add MCP server usage notes` | 补充 MCP server 的启动方式、默认端口、示例工具和主服务如何调用 MCP server 的说明。 |
+| 11 | docs | `docs: add database initialization guide` | 基于 `resources/database/` 下的脚本，整理 PostgreSQL 初始化、升级脚本执行顺序和注意事项。 |
 
 ## 下一次执行建议
 
 1. 先运行 `git status -sb`，确认工作区是否干净。
 2. 阅读 `docs/weekly-contribution-plan.md` 和本文件，确认下一个任务。
-3. 如果继续 Day 9，重点查看：
-   - `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/retrieve/postprocessor/`
-   - `DeduplicationPostProcessor.java`
-   - 现有测试目录中与检索或后置处理相关的测试写法
+3. 如果继续 Day 10，重点查看：
+   - `mcp-server/`
+   - `bootstrap/src/main/java/com/nageoffer/ai/ragent/mcp/`
+   - README 和现有 MCP 相关文档入口
 4. 完成后更新：
    - 对应文档内容
    - `docs/weekly-contribution-plan.md` 中的任务状态
