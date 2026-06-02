@@ -141,7 +141,7 @@ README 中描述的主要扩展点包括：
 1. `main` 保持为每天推送并产生贡献记录的分支。
 2. 创建本地队列分支，通常命名为 `contribution-queue`。
 3. 在 `contribution-queue` 上每个 commit 对应一个完整、有意义的改进。
-4. 每天通过脚本把 `contribution-queue` 中下一条 commit cherry-pick 到 `main`，运行轻量检查，然后 push。
+4. 每天通过脚本把 `contribution-queue` 中下一条尚未等价应用到 `main` 的 commit 发布到 `main`，运行轻量检查，然后 push。
 5. 不要为了贡献记录创建空提交、时间戳提交、回填日期提交或无意义文件改动。
 
 重要规则：自动发布脚本只按 commit 顺序工作，不会理解或拆分“几天的工作量”。因此，一天要发布的内容必须提前整理成一个独立 commit。如果三天内容被合并成一个 commit，脚本会在一天内一次性发布；如果希望连续三天发布，就必须提前拆成三个独立 commit。
@@ -157,6 +157,9 @@ README 中描述的主要扩展点包括：
 # 发布下一条队列 commit 并推送 main
 ./publish_queued_commit.ps1
 
+# 如果确实要保留队列 commit 原始 AuthorDate
+./publish_queued_commit.ps1 -PreserveAuthorDate
+
 # 只有目标后端测试通过才发布
 ./publish_queued_commit.ps1 -CheckCommand "./mvnw.cmd -pl bootstrap -Dtest=DeduplicationPostProcessorTest test"
 
@@ -164,7 +167,7 @@ README 中描述的主要扩展点包括：
 ./publish_queued_commit.ps1 -CheckCommand "npm --prefix frontend run build"
 ```
 
-真实发布时脚本要求工作区干净，默认对 `main` 执行 `pull --ff-only`，从 `main..contribution-queue` 中选择最早的一条 commit，cherry-pick 到 `main`，可选执行 `-CheckCommand`，最后 push。检查失败时，脚本会自动中止 cherry-pick，避免发布失败改动。
+真实发布时脚本要求工作区干净，默认对 `main` 执行 `pull --ff-only`，用 `git cherry` 跳过已经等价应用到 `main` 的队列 commit，选择最早一条未发布 commit，先应用但不提交，可选执行 `-CheckCommand`，检查通过后再提交并 push。默认会把新提交的 AuthorDate 重置为发布时间，确保贡献图按当天归属；如果要保留队列 commit 原始 AuthorDate，显式传 `-PreserveAuthorDate`。检查失败时，脚本会恢复到发布前的干净工作区。
 `-DryRun` 只读取本地分支并打印下一条队列 commit；它不要求工作区干净，也不会 fetch、pull、切换分支、cherry-pick、运行检查或 push。
 
 ## Git 贡献身份

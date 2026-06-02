@@ -45,7 +45,7 @@ git checkout -b contribution-queue
 ./publish_queued_commit.ps1 -CheckCommand "./mvnw.cmd -pl bootstrap -Dtest=DeduplicationPostProcessorTest test"
 ```
 
-根目录脚本 `publish_queued_commit.ps1` 会从 `main..contribution-queue` 中选择最早的一条 commit，cherry-pick 到 `main`，可选运行 `-CheckCommand` 指定的检查，然后 push `main`。如果检查失败，脚本会自动中止 cherry-pick。
+根目录脚本 `publish_queued_commit.ps1` 会用 `git cherry` 跳过已经等价应用到 `main` 的队列 commit，选择最早一条未发布 commit，先应用但不提交，可选运行 `-CheckCommand` 指定的检查，检查通过后再提交并 push `main`。默认会把新提交的 AuthorDate 重置为发布时间，确保贡献图按当天归属；如果要保留队列 commit 原始 AuthorDate，显式传 `-PreserveAuthorDate`。如果检查失败，脚本会恢复到发布前的干净工作区。
 
 重要规则：脚本只认识 commit，不会自动判断或拆分“几天的工作量”。一天要自动发布的内容必须提前做成一个独立 commit。如果三天内容放在一个 commit 里，脚本会在一天内一次性发布；如果要分三天发布，就需要提前拆成三个 commit。
 

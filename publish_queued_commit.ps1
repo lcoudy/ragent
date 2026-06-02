@@ -6,7 +6,8 @@ param(
     [switch]$DryRun,
     [switch]$NoFetch,
     [switch]$NoPull,
-    [switch]$NoPush
+    [switch]$NoPush,
+    [switch]$PreserveAuthorDate
 )
 
 Set-StrictMode -Version Latest
@@ -47,11 +48,28 @@ function Get-CurrentBranch {
 }
 
 function Get-NextQueuedCommit {
-    $commits = @(Get-GitOutput rev-list --reverse "${MainBranch}..${QueueBranch}")
-    if ($commits.Count -eq 0) {
-        return $null
+    $commits = @(Get-GitOutput cherry $MainBranch $QueueBranch)
+    foreach ($commit in $commits) {
+        if ($commit -match '^\+\s+([0-9a-f]{40})$') {
+            return $Matches[1]
+        }
     }
-    return $commits[0]
+    return $null
+}
+
+function Undo-PendingPublish {
+    $gitDir = Get-GitOutput rev-parse --git-dir
+    if ($gitDir -is [array]) {
+        $gitDir = $gitDir[0]
+    }
+
+    $cherryPickHead = Join-Path $gitDir "CHERRY_PICK_HEAD"
+    if (Test-Path $cherryPickHead) {
+        Invoke-Git cherry-pick --abort
+        return
+    }
+
+    Invoke-Git reset --hard HEAD
 }
 
 function Invoke-CheckCommand {
@@ -95,6 +113,11 @@ try {
 
         $subject = Get-GitOutput log -1 --pretty=format:%s $nextCommit
         Write-Host "Next queued commit: $nextCommit $subject"
+        if ($PreserveAuthorDate) {
+            Write-Host "DryRun only: author date would be preserved from the queued commit."
+        } else {
+            Write-Host "DryRun only: author date would be reset to the publish time."
+        }
         Write-Host "DryRun only: no fetch, pull, checkout, cherry-pick, check, or push was performed."
         exit 0
     }
@@ -122,13 +145,18 @@ try {
     $subject = Get-GitOutput log -1 --pretty=format:%s $nextCommit
     Write-Host "Next queued commit: $nextCommit $subject"
 
-    Invoke-Git cherry-pick $nextCommit
-
     try {
+        Invoke-Git cherry-pick --no-commit $nextCommit
         Invoke-CheckCommand -Command $CheckCommand
+
+        if ($PreserveAuthorDate) {
+            Invoke-Git commit -C $nextCommit
+        } else {
+            Invoke-Git commit --reset-author -C $nextCommit
+        }
     } catch {
-        Write-Host "Check failed; aborting cherry-pick."
-        Invoke-Git cherry-pick --abort
+        Write-Host "Publish failed; restoring the clean working tree."
+        Undo-PendingPublish
         throw
     }
 
