@@ -10,8 +10,8 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 10
-- 下一项任务：Day 11，`docs: add database initialization guide`
+- 已完成贡献任务：Day 1 到 Day 11
+- 下一项任务：Day 12，`docs: add RAG trace reading guide`
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
 ## 每日贡献规则
@@ -63,12 +63,12 @@ git checkout -b contribution-queue
 | 8 | Done | `fed1bb8` | 补充模型路由与故障切换说明，覆盖候选选择、健康状态、流式首包探测和排查路径。 |
 | 9 | Done | `1137aad` | 新增检索结果去重测试，覆盖重复 chunk id、跨通道相同文本和空通道结果。 |
 | 10 | Done | `queued` | 新增 MCP server 使用说明，覆盖启动方式、默认 endpoint、示例工具、主服务配置和工具发现调用链路。 |
+| 11 | Done | `queued` | 新增数据库初始化指南，覆盖 PostgreSQL 默认配置、pgvector、schema/data 脚本、升级顺序和常见问题。 |
 
 ## 待完成任务
 
 | Day | 状态 | 类型 | 建议提交信息 | 任务 |
 |---|---|---|---|---|
-| 11 | Todo | docs | `docs: add database initialization guide` | 基于 `resources/database/` 整理 PostgreSQL 初始化说明，包括 schema/data 脚本、升级顺序和常见问题。 |
 | 12 | Todo | docs | `docs: add RAG trace reading guide` | 结合后端 Trace 记录和管理后台，说明如何理解一次 RAG 请求的链路追踪。 |
 | 13 | Todo | test | `test: cover search channel enablement rules` | 为检索通道启用规则补充测试，例如低置信度意图回退和意图定向检索优先级。 |
 | 14 | Todo | docs | `docs: add contribution-friendly task list` | 整理适合初学者继续贡献的任务清单，包括文档、测试、小型 bugfix 和前端体验优化。 |
@@ -82,6 +82,7 @@ git checkout -b contribution-queue
 ## 最近提交
 
 ```text
+queued docs: add database initialization guide
 queued docs: add MCP server usage notes
 1137aad test: cover retrieval deduplication behavior
 fed1bb8 docs: document model routing failover behavior
@@ -96,12 +97,14 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-Day 11 建议重点查看：
+Day 12 建议重点查看：
 
-- `resources/database/schema_pg.sql`
-- `resources/database/init_data_pg.sql`
-- `resources/database/upgrade_v1.0_to_v1.1.sql`
-- `resources/database/upgrade_v1.1_to_v1.2.sql`
-- `bootstrap/src/main/resources/application.yaml`
+- `framework/src/main/java/com/nageoffer/ai/ragent/framework/trace/`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/controller/RagTraceController.java`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/service/RagTraceRecordService.java`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/service/RagTraceQueryService.java`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/dao/entity/RagTraceRunDO.java`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/dao/entity/RagTraceNodeDO.java`
+- `frontend/src/pages/admin/traces/`
 
-预期产出：一篇聚焦 PostgreSQL 初始化、初始化数据、升级脚本顺序和常见问题的文档；如合适，同步在 README 快速导航中增加入口。
+预期产出：一篇聚焦 RAG Trace 数据结构、后端接口、管理后台页面和一次请求排查路径的阅读指南；如合适，同步在 README 快速导航中增加入口。
