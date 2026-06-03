@@ -6,12 +6,16 @@
 
 ## 当前状态
 
-- 当前分支：`main`
+- 发布目标分支：`main`
+- 队列分支：`contribution-queue`
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 11
-- 下一项任务：Day 12，`docs: add RAG trace reading guide`
+- 已完成贡献任务：Day 1 到 Day 12
+- 已完成并已正式提交到 GitHub：Day 1 到 Day 9
+- 已完成但未正式提交到 GitHub：Day 10 到 Day 12（仅在本地 `contribution-queue` 队列中）
+- 未完成且未提交到 GitHub：Day 13 到 Day 20
+- 下一项任务：Day 13，`test: cover search channel enablement rules`
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
 ## 每日贡献规则
@@ -49,9 +53,9 @@ git checkout -b contribution-queue
 
 重要规则：脚本只认识 commit，不会自动判断或拆分“几天的工作量”。一天要自动发布的内容必须提前做成一个独立 commit。如果三天内容放在一个 commit 里，脚本会在一天内一次性发布；如果要分三天发布，就需要提前拆成三个 commit。
 
-## 已完成任务
+## 已完成并已正式提交到 GitHub
 
-| Day | 状态 | 提交 | 说明 |
+| Day | 状态 | GitHub 提交 | 说明 |
 |---|---|---|---|
 | 1 | Done | `33ab64e` | 梳理本地依赖说明，包括 PostgreSQL、Redis、RocketMQ、RustFS 和 AI Key。 |
 | 2 | Done | `33ab64e` | 对齐 `/api/ragent` 接口示例与默认本地服务端口、上下文路径。 |
@@ -60,16 +64,23 @@ git checkout -b contribution-queue
 | 5 | Done | `edad60d` | 新增文档摄取 Pipeline 排查指南，并在 README 快速导航中增加入口。 |
 | 6 | Done | `a43f337` | 新增入库 Pipeline 校验测试，覆盖循环依赖、节点缺失、无起始节点和校验日志初始化。 |
 | 7 | Done | `7ed1f60` | 新增前端启动说明，覆盖 Node/npm、`VITE_API_BASE_URL`、本地后端地址、Vite 代理和登录跳转。 |
-| 8 | Done | `fed1bb8` | 补充模型路由与故障切换说明，覆盖候选选择、健康状态、流式首包探测和排查路径。 |
+| 8 | Done | `fed1bb8` | 补充模型路由与故障切换说明，覆盖候选选择、健康检查、熔断降级和首包探测路径。 |
 | 9 | Done | `1137aad` | 新增检索结果去重测试，覆盖重复 chunk id、跨通道相同文本和空通道结果。 |
-| 10 | Done | `queued` | 新增 MCP server 使用说明，覆盖启动方式、默认 endpoint、示例工具、主服务配置和工具发现调用链路。 |
-| 11 | Done | `queued` | 新增数据库初始化指南，覆盖 PostgreSQL 默认配置、pgvector、schema/data 脚本、升级顺序和常见问题。 |
 
-## 待完成任务
+## 已完成但未正式提交到 GitHub
+
+这些任务已在本地 `contribution-queue` 中做成独立 commit，等待 `publish_queued_commit.ps1` 后续按天 cherry-pick 到 `main` 并 push。
+
+| Day | 状态 | 本地队列提交 | 建议提交信息 | 说明 |
+|---|---|---|---|---|
+| 10 | Done | `7879aa1` | `docs: add MCP server usage notes` | 新增 MCP server 使用说明，覆盖启动方式、默认 endpoint、示例工具、主服务配置和工具发现调用链路。 |
+| 11 | Done | `cc7c629` | `docs: add database initialization guide` | 新增数据库初始化指南，覆盖 PostgreSQL 默认配置、pgvector、schema/data 脚本、升级顺序和常见问题。 |
+| 12 | Done | `queue HEAD` | `docs: add RAG trace reading guide` | 新增 RAG Trace 阅读指南，覆盖注解采集、上下文透传、数据表、查询接口、管理后台和排查路径。 |
+
+## 未完成且未提交到 GitHub
 
 | Day | 状态 | 类型 | 建议提交信息 | 任务 |
 |---|---|---|---|---|
-| 12 | Todo | docs | `docs: add RAG trace reading guide` | 结合后端 Trace 记录和管理后台，说明如何理解一次 RAG 请求的链路追踪。 |
 | 13 | Todo | test | `test: cover search channel enablement rules` | 为检索通道启用规则补充测试，例如低置信度意图回退和意图定向检索优先级。 |
 | 14 | Todo | docs | `docs: add contribution-friendly task list` | 整理适合初学者继续贡献的任务清单，包括文档、测试、小型 bugfix 和前端体验优化。 |
 | 15 | Todo | docs | `docs: add model provider configuration guide` | 整理聊天、Embedding、Rerank 模型供应商的配置项、默认模型、环境变量和常见配置错误。 |
@@ -82,8 +93,9 @@ git checkout -b contribution-queue
 ## 最近提交
 
 ```text
-queued docs: add database initialization guide
-queued docs: add MCP server usage notes
+queue HEAD docs: add RAG trace reading guide (queued)
+cc7c629 docs: add database initialization guide (queued)
+7879aa1 docs: add MCP server usage notes (queued)
 1137aad test: cover retrieval deduplication behavior
 fed1bb8 docs: document model routing failover behavior
 7ed1f60 docs: add frontend startup notes
@@ -97,14 +109,11 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-Day 12 建议重点查看：
+Day 13 建议重点查看：
 
-- `framework/src/main/java/com/nageoffer/ai/ragent/framework/trace/`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/controller/RagTraceController.java`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/service/RagTraceRecordService.java`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/service/RagTraceQueryService.java`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/dao/entity/RagTraceRunDO.java`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/dao/entity/RagTraceNodeDO.java`
-- `frontend/src/pages/admin/traces/`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/retrieve/channel/VectorGlobalSearchChannel.java`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/retrieve/channel/IntentDirectedSearchChannel.java`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/retrieve/channel/SearchContext.java`
+- `bootstrap/src/test/java/com/nageoffer/ai/ragent/rag/core/retrieve/`
 
-预期产出：一篇聚焦 RAG Trace 数据结构、后端接口、管理后台页面和一次请求排查路径的阅读指南；如合适，同步在 README 快速导航中增加入口。
+预期产出：为检索通道启用规则补充轻量测试，覆盖低置信度触发全局检索、意图定向检索保持启用等行为。

@@ -130,7 +130,22 @@ README 中描述的主要扩展点包括：
 ## 贡献计划流程
 
 每日贡献计划和进度记录统一维护在根目录 `Progress.md`。
-`Progress.md` 是已完成任务、待完成任务、最近提交和下一步执行说明的唯一事实来源。旧的 `process.md` 和 `docs/weekly-contribution-plan.md` 已废弃并移除，不再使用。
+`Progress.md` 是任务发布状态、最近提交和下一步执行说明的唯一事实来源。旧的 `process.md` 和 `docs/weekly-contribution-plan.md` 已废弃并移除，不再使用。
+
+`Progress.md` 的任务状态按是否正式提交到 GitHub 区分：
+
+1. 已完成并已正式提交到 GitHub：已经在 `main` 上并完成 push。
+2. 已完成但未正式提交到 GitHub：已经在本地 `contribution-queue` 中做成独立 commit，但还没被脚本 cherry-pick 到 `main` 并 push。
+3. 未完成且未提交到 GitHub：还没有完成实现，也没有发布。
+
+每次启动 Codex 或继续贡献前，先校准这三类状态：
+
+1. 阅读 `Progress.md` 的当前状态和三张任务表。
+2. 查看 `git log --oneline main..contribution-queue`，确认本地队列还剩哪些未发布 commit。
+3. 查看 `git log --oneline main`，确认哪些任务已经进入 `main`。
+4. 如果某个本地队列任务已经被脚本发布到 `main` 并推送，及时把它从“已完成但未正式提交到 GitHub”移动到“已完成并已正式提交到 GitHub”，并记录 `main` 上的实际提交 hash。
+5. 如果队列为空，更新“已完成但未正式提交到 GitHub”为暂无，并把下一项任务指向第一个未完成任务。
+6. 只校准状态，不要为了更新状态创建空提交；如果需要提交状态修正，必须把它作为真实进度维护 commit，或合并到当前正在准备的队列 commit 中。
 
 ## 每日队列式贡献流程
 
