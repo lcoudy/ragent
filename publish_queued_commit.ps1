@@ -7,7 +7,8 @@ param(
     [switch]$NoFetch,
     [switch]$NoPull,
     [switch]$NoPush,
-    [switch]$PreserveAuthorDate
+    [switch]$PreserveAuthorDate,
+    [switch]$AutoStash
 )
 
 Set-StrictMode -Version Latest
@@ -36,6 +37,36 @@ function Assert-CleanWorkingTree {
     $status = @(Get-GitOutput status --porcelain)
     if ($status.Count -gt 0) {
         throw "Working tree is not clean. Commit, stash, or clean local changes before publishing a queued commit."
+    }
+}
+
+function Save-WorkingTreeForPublish {
+    $status = @(Get-GitOutput status --porcelain)
+    if ($status.Count -eq 0) {
+        return $null
+    }
+
+    if (-not $AutoStash) {
+        throw "Working tree is not clean. Commit, stash, or clean local changes before publishing a queued commit."
+    }
+
+    $message = "auto-publish temporary stash $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+    Write-Host "Working tree is not clean; stashing local changes before publishing."
+    Invoke-Git stash push --include-untracked -m $message
+    return "stash@{0}"
+}
+
+function Restore-WorkingTreeAfterPublish {
+    param([string]$StashRef)
+
+    if ([string]::IsNullOrWhiteSpace($StashRef)) {
+        return
+    }
+
+    Write-Host "Restoring stashed local changes after publishing."
+    & git stash pop $StashRef
+    if ($LASTEXITCODE -ne 0) {
+        Write-Warning "Could not restore stashed local changes automatically. The stash was kept as $StashRef."
     }
 }
 
@@ -92,6 +123,7 @@ Set-Location $RepoRoot
 Invoke-Git rev-parse --show-toplevel | Out-Null
 
 $originalBranch = Get-CurrentBranch
+$temporaryStash = $null
 
 try {
     $branches = @(Get-GitOutput branch --list $QueueBranch)
@@ -122,7 +154,7 @@ try {
         exit 0
     }
 
-    Assert-CleanWorkingTree
+    $temporaryStash = Save-WorkingTreeForPublish
 
     if (-not $NoFetch) {
         Invoke-Git fetch --all --prune
@@ -171,6 +203,10 @@ try {
     Write-Error $_
     exit 1
 } finally {
+    if (-not $DryRun -and $temporaryStash) {
+        Restore-WorkingTreeAfterPublish -StashRef $temporaryStash
+    }
+
     if ($DryRun -and $originalBranch -and (Get-CurrentBranch) -ne $originalBranch) {
         Invoke-Git checkout $originalBranch
     }
