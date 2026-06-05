@@ -11,11 +11,11 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 13
+- 已完成贡献任务：Day 1 到 Day 14
 - 已完成并已正式提交到 GitHub：Day 1 到 Day 9
-- 已完成但未正式提交到 GitHub：Day 10 到 Day 13（仅在本地 `contribution-queue` 队列中）
-- 未完成且未提交到 GitHub：Day 14 到 Day 20
-- 下一项任务：Day 14，`docs: add contribution-friendly task list`
+- 已完成但未正式提交到 GitHub：Day 10 到 Day 14（仅在本地 `contribution-queue` 队列中）
+- 未完成且未提交到 GitHub：Day 15 到 Day 20
+- 下一项任务：Day 15，`docs: add model provider configuration guide`
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
 ## 每日贡献规则
@@ -76,13 +76,13 @@ git checkout -b contribution-queue
 | 10 | Done | `7879aa1` | `docs: add MCP server usage notes` | 新增 MCP server 使用说明，覆盖启动方式、默认 endpoint、示例工具、主服务配置和工具发现调用链路。 |
 | 11 | Done | `cc7c629` | `docs: add database initialization guide` | 新增数据库初始化指南，覆盖 PostgreSQL 默认配置、pgvector、schema/data 脚本、升级顺序和常见问题。 |
 | 12 | Done | `queue HEAD` | `docs: add RAG trace reading guide` | 新增 RAG Trace 阅读指南，覆盖注解采集、上下文透传、数据表、查询接口、管理后台和排查路径。 |
-| 13 | Done | `queue HEAD` | `test: cover search channel enablement rules` | 新增检索通道启用规则测试，覆盖全局检索低置信度兜底、单意图补充，以及意图定向检索的 KB 意图过滤规则。 |
+| 13 | Done | `6a5cf0a` | `test: cover search channel enablement rules` | 新增检索通道启用规则测试，覆盖全局检索低置信度兜底、单意图补充，以及意图定向检索的 KB 意图过滤规则。 |
+| 14 | Done | `queue HEAD` | `docs: add contribution-friendly task list` | 新增适合继续贡献的任务清单，按文档、测试、小型 bugfix、前端体验和后端 AI 工程方向分类。 |
 
 ## 未完成且未提交到 GitHub
 
 | Day | 状态 | 类型 | 建议提交信息 | 任务 |
 |---|---|---|---|---|
-| 14 | Todo | docs | `docs: add contribution-friendly task list` | 整理适合初学者继续贡献的任务清单，包括文档、测试、小型 bugfix 和前端体验优化。 |
 | 15 | Todo | docs | `docs: add model provider configuration guide` | 整理聊天、Embedding、Rerank 模型供应商的配置项、默认模型、环境变量和常见配置错误。 |
 | 16 | Todo | test | `test: cover model routing fallback behavior` | 为模型路由故障切换补充轻量测试，覆盖候选模型失败后继续尝试下一个模型的行为。 |
 | 17 | Todo | docs | `docs: add knowledge base operation guide` | 补充知识库、文档、分块和定时刷新相关接口的使用说明，帮助定位前后端功能入口。 |
@@ -93,6 +93,7 @@ git checkout -b contribution-queue
 ## 最近提交
 
 ```text
+queue HEAD docs: add contribution-friendly task list (queued)
 queue HEAD test: cover search channel enablement rules (queued)
 queue HEAD docs: add RAG trace reading guide (queued)
 cc7c629 docs: add database initialization guide (queued)
@@ -110,14 +111,13 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-Day 14 建议重点查看：
+Day 15 建议重点查看：
 
-- `README.md`
-- `docs/backend-module-reading-guide.md`
-- `docs/ingestion-pipeline-troubleshooting.md`
-- `docs/model-routing-failover.md`
-- `docs/rag-trace-reading-guide.md`
-- `bootstrap/src/test/java/com/nageoffer/ai/ragent/`
-- `frontend/src/pages/admin/`
+- `bootstrap/src/main/resources/application.yaml`
+- `infra-ai/src/main/java/com/nageoffer/ai/ragent/infra/config/AIModelProperties.java`
+- `infra-ai/src/main/java/com/nageoffer/ai/ragent/infra/enums/ModelProvider.java`
+- `infra-ai/src/main/java/com/nageoffer/ai/ragent/infra/chat/`
+- `infra-ai/src/main/java/com/nageoffer/ai/ragent/infra/embedding/`
+- `infra-ai/src/main/java/com/nageoffer/ai/ragent/infra/rerank/`
 
-预期产出：整理适合继续贡献的任务清单，按文档、测试、小型 bugfix、前端体验优化和后端 AI 工程方向分类，方便后续从低风险任务继续推进。
+预期产出：整理模型供应商配置指南，覆盖 chat、embedding、rerank 的配置项、默认模型、环境变量和常见配置错误。
