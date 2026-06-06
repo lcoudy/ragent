@@ -54,6 +54,7 @@ Ragent 是一个企业级 Agentic RAG 平台，覆盖从文档入库到智能问
 | 🗄️ | <a href="./docs/database-initialization.md">数据库初始化指南</a> | 初始化 PostgreSQL、pgvector、基础数据和版本升级脚本 |
 | 🔎 | <a href="./docs/rag-trace-reading-guide.md">RAG Trace 阅读指南</a> | 理解链路追踪采集、落库、查询接口和管理后台排查路径 |
 | 🧰 | <a href="./docs/contribution-friendly-task-list.md">适合继续贡献的任务清单</a> | 按文档、测试、小型 bugfix、前端体验和后端 AI 工程分类后续任务 |
+| ⚙️ | <a href="./docs/model-provider-configuration.md">模型供应商配置指南</a> | 配置 Chat、Embedding、Rerank 模型候选、API Key、优先级和故障切换 |
 | 🧠 | <a href="./docs/model-routing-failover.md">模型路由与故障切换说明</a> | 理解模型候选选择、健康检查、熔断降级和首包探测 |
 | 🛠️ | <a href="./docs/ingestion-pipeline-troubleshooting.md">文档摄取 Pipeline 排查指南</a> | 排查节点连线、任务失败和节点日志 |
 | 📝 | <a href="https://nageoffer.com/ragent/interview/" target="_blank">简历怎么写</a> | 项目如何写到简历上 |
