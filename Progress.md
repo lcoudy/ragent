@@ -12,9 +12,9 @@
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
 - 已完成贡献任务：Day 1 到 Day 17
-- 已完成并已正式提交到 GitHub：Day 1 到 Day 11
-- 已完成但未正式提交到 GitHub：Day 12 到 Day 17（仅在本地 `contribution-queue` 队列中）
-- 未完成且未提交到 GitHub：Day 18 到 Day 20
+- 已完成并已正式提交到 GitHub：Day 1 到 Day 17
+- 已完成但未正式提交到 GitHub：暂无
+- 未完成且未提交到 GitHub：Day 18 到 Day 30
 - 下一项任务：Day 18，`docs: add retrieval troubleshooting guide`
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
@@ -68,19 +68,20 @@ git checkout -b contribution-queue
 | 9 | Done | `1137aad` | 新增检索结果去重测试，覆盖重复 chunk id、跨通道相同文本和空通道结果。 |
 | 10 | Done | `d0d5733` | 新增 MCP server 使用说明，覆盖启动方式、默认 endpoint、示例工具、主服务配置和工具发现调用链路。 |
 | 11 | Done | `3235515` | 新增数据库初始化指南，覆盖 PostgreSQL 默认配置、pgvector、schema/data 脚本、升级顺序和常见问题。 |
+| 12 | Done | `6d31799` | 新增 RAG Trace 阅读指南，覆盖注解采集、上下文透传、数据表、查询接口、管理后台和排查路径。 |
+| 13 | Done | `1729ba0` | 新增检索通道启用规则测试，覆盖全局检索低置信度兜底、单意图补充，以及意图定向检索的 KB 意图过滤规则。 |
+| 14 | Done | `fc32b8e` | 新增适合继续贡献的任务清单，按文档、测试、小型 bugfix、前端体验和后端 AI 工程方向分类。 |
+| 15 | Done | `b28a97d` | 新增模型供应商配置指南，覆盖 Chat、Embedding、Rerank 模型候选、API Key、优先级、故障切换和常见配置错误。 |
+| 16 | Done | `6800eb5` | 新增模型路由故障切换测试，覆盖候选失败后继续尝试下一个模型，以及已熔断候选跳过规则。 |
+| 17 | Done | `57e2f71` | 新增知识库操作指南，覆盖知识库、文档、分块、定时刷新、后台入口和常见排查路径。 |
 
 ## 已完成但未正式提交到 GitHub
 
-这些任务已在本地 `contribution-queue` 中做成独立 commit，等待 `publish_queued_commit.ps1` 后续按天 cherry-pick 到 `main` 并 push。
+当前没有等待发布的本地队列任务。`publish_queued_commit.ps1 -DryRun` 应显示没有剩余 `main..contribution-queue` 队列 commit。
 
 | Day | 状态 | 本地队列提交 | 建议提交信息 | 说明 |
 |---|---|---|---|---|
-| 12 | Done | `4de374b` | `docs: add RAG trace reading guide` | 新增 RAG Trace 阅读指南，覆盖注解采集、上下文透传、数据表、查询接口、管理后台和排查路径。 |
-| 13 | Done | `6a5cf0a` | `test: cover search channel enablement rules` | 新增检索通道启用规则测试，覆盖全局检索低置信度兜底、单意图补充，以及意图定向检索的 KB 意图过滤规则。 |
-| 14 | Done | `0628014` | `docs: add contribution-friendly task list` | 新增适合继续贡献的任务清单，按文档、测试、小型 bugfix、前端体验和后端 AI 工程方向分类。 |
-| 15 | Done | `6ae6bb7` | `docs: add model provider configuration guide` | 新增模型供应商配置指南，覆盖 Chat、Embedding、Rerank 模型候选、API Key、优先级、故障切换和常见配置错误。 |
-| 16 | Done | `614ba69` | `test: cover model routing fallback behavior` | 新增模型路由故障切换测试，覆盖候选失败后继续尝试下一个模型，以及已熔断候选跳过规则。 |
-| 17 | Done | `queue HEAD` | `docs: add knowledge base operation guide` | 新增知识库操作指南，覆盖知识库、文档、分块、定时刷新、后台入口和常见排查路径。 |
+| - | - | - | - | 暂无。 |
 
 ## 未完成且未提交到 GitHub
 
@@ -89,18 +90,31 @@ git checkout -b contribution-queue
 | 18 | Todo | docs | `docs: add retrieval troubleshooting guide` | 整理检索无结果、结果不准、Rerank 未生效、向量库配置错误等常见排查路径。 |
 | 19 | Todo | test | `test: cover query rewrite utility behavior` | 为问题重写或术语映射工具补充边界测试，覆盖空输入、无匹配映射和多映射命中的情况。 |
 | 20 | Todo | docs | `docs: add resume-oriented project summary` | 以简历复盘为目标，总结项目架构、核心链路、可讲亮点、个人贡献记录和后续改造方向。 |
+| 21 | Todo | test | `test: cover ingestion node condition behavior` | 为入库 Pipeline 节点条件执行补充测试，覆盖条件跳过、条件命中和节点日志记录。 |
+| 22 | Todo | docs | `docs: add frontend admin operation guide` | 整理管理后台页面、认证跳转、API service 解包、常见配置和本地联调路径。 |
+| 23 | Todo | test | `test: cover trace context propagation` | 为 RAG Trace 上下文透传补充测试，覆盖上下文初始化、嵌套调用和清理行为。 |
+| 24 | Todo | docs | `docs: document MCP tool extension path` | 补充 MCP 工具扩展指南，覆盖主服务工具执行器、独立 MCP server 示例和联调排查。 |
+| 25 | Todo | test | `test: cover model health store behavior` | 为模型健康状态存储补充测试，覆盖失败计数、熔断窗口、恢复和跳过逻辑。 |
+| 26 | Todo | docs | `docs: add vector store configuration guide` | 整理 PostgreSQL pgvector 与 Milvus 配置、切换方式、初始化要求和常见错误。 |
+| 27 | Todo | test | `test: cover chunking edge cases` | 为文本清理或分块工具补充边界测试，覆盖短文本、空白文本、重叠窗口和超长段落。 |
+| 28 | Todo | docs | `docs: add API response contract guide` | 说明后端 `Result` 响应格式、错误码、前端 Axios 解包和认证失效处理。 |
+| 29 | Todo | test | `test: cover session memory boundaries` | 为聊天会话记忆补充边界测试，覆盖空历史、历史截断和多轮上下文拼接。 |
+| 30 | Todo | docs | `docs: add release and contribution workflow guide` | 总结队列分支、每日发布脚本、检查命令、失败恢复和进度维护规则。 |
 
 ## 最近提交
 
 ```text
-queue HEAD docs: add knowledge base operation guide (queued)
-queue HEAD test: cover model routing fallback behavior (queued)
-queue HEAD docs: add model provider configuration guide (queued)
-queue HEAD docs: add contribution-friendly task list (queued)
-6a5cf0a test: cover search channel enablement rules (queued)
-4de374b docs: add RAG trace reading guide (queued)
+57e2f71 docs: add knowledge base operation guide
+6800eb5 test: cover model routing fallback behavior
+b28a97d docs: add model provider configuration guide
+fc32b8e docs: add contribution-friendly task list
+0aeb5ff fix: tolerate dirty tree in queued publisher
+1729ba0 test: cover search channel enablement rules
+6d31799 docs: add RAG trace reading guide
 3235515 docs: add database initialization guide
+5d9ef0f fix: publish queued commits with current author date
 d0d5733 docs: add MCP server usage notes
+cc23b54 chore: consolidate contribution workflow updates
 1137aad test: cover retrieval deduplication behavior
 fed1bb8 docs: document model routing failover behavior
 7ed1f60 docs: add frontend startup notes
