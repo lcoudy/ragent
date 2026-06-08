@@ -11,11 +11,11 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 16
+- 已完成贡献任务：Day 1 到 Day 17
 - 已完成并已正式提交到 GitHub：Day 1 到 Day 11
-- 已完成但未正式提交到 GitHub：Day 12 到 Day 16（仅在本地 `contribution-queue` 队列中）
-- 未完成且未提交到 GitHub：Day 17 到 Day 20
-- 下一项任务：Day 17，`docs: add knowledge base operation guide`
+- 已完成但未正式提交到 GitHub：Day 12 到 Day 17（仅在本地 `contribution-queue` 队列中）
+- 未完成且未提交到 GitHub：Day 18 到 Day 20
+- 下一项任务：Day 18，`docs: add retrieval troubleshooting guide`
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
 ## 每日贡献规则
@@ -79,13 +79,13 @@ git checkout -b contribution-queue
 | 13 | Done | `6a5cf0a` | `test: cover search channel enablement rules` | 新增检索通道启用规则测试，覆盖全局检索低置信度兜底、单意图补充，以及意图定向检索的 KB 意图过滤规则。 |
 | 14 | Done | `0628014` | `docs: add contribution-friendly task list` | 新增适合继续贡献的任务清单，按文档、测试、小型 bugfix、前端体验和后端 AI 工程方向分类。 |
 | 15 | Done | `6ae6bb7` | `docs: add model provider configuration guide` | 新增模型供应商配置指南，覆盖 Chat、Embedding、Rerank 模型候选、API Key、优先级、故障切换和常见配置错误。 |
-| 16 | Done | `queue HEAD` | `test: cover model routing fallback behavior` | 新增模型路由故障切换测试，覆盖候选失败后继续尝试下一个模型，以及已熔断候选跳过规则。 |
+| 16 | Done | `614ba69` | `test: cover model routing fallback behavior` | 新增模型路由故障切换测试，覆盖候选失败后继续尝试下一个模型，以及已熔断候选跳过规则。 |
+| 17 | Done | `queue HEAD` | `docs: add knowledge base operation guide` | 新增知识库操作指南，覆盖知识库、文档、分块、定时刷新、后台入口和常见排查路径。 |
 
 ## 未完成且未提交到 GitHub
 
 | Day | 状态 | 类型 | 建议提交信息 | 任务 |
 |---|---|---|---|---|
-| 17 | Todo | docs | `docs: add knowledge base operation guide` | 补充知识库、文档、分块和定时刷新相关接口的使用说明，帮助定位前后端功能入口。 |
 | 18 | Todo | docs | `docs: add retrieval troubleshooting guide` | 整理检索无结果、结果不准、Rerank 未生效、向量库配置错误等常见排查路径。 |
 | 19 | Todo | test | `test: cover query rewrite utility behavior` | 为问题重写或术语映射工具补充边界测试，覆盖空输入、无匹配映射和多映射命中的情况。 |
 | 20 | Todo | docs | `docs: add resume-oriented project summary` | 以简历复盘为目标，总结项目架构、核心链路、可讲亮点、个人贡献记录和后续改造方向。 |
@@ -93,6 +93,7 @@ git checkout -b contribution-queue
 ## 最近提交
 
 ```text
+queue HEAD docs: add knowledge base operation guide (queued)
 queue HEAD test: cover model routing fallback behavior (queued)
 queue HEAD docs: add model provider configuration guide (queued)
 queue HEAD docs: add contribution-friendly task list (queued)
@@ -113,12 +114,12 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-Day 17 建议重点查看：
+Day 18 建议重点查看：
 
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/knowledge/controller/KnowledgeBaseController.java`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/knowledge/controller/KnowledgeDocumentController.java`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/knowledge/controller/KnowledgeChunkController.java`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/knowledge/service/`
-- `frontend/src/pages/admin/knowledge/`
+- `docs/multi-channel-retrieval.md`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/retrieve/`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/retrieve/channel/`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/retrieve/postprocessor/`
+- `infra-ai/src/main/java/com/nageoffer/ai/ragent/infra/rerank/`
 
-预期产出：补充知识库操作指南，覆盖知识库、文档、分块、定时刷新相关接口，以及管理后台入口和常见操作路径。
+预期产出：补充检索排查指南，覆盖检索无结果、结果不准、Rerank 未生效、向量库配置错误和多通道召回异常等场景。
