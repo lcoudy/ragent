@@ -11,11 +11,11 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 17
+- 已完成贡献任务：Day 1 到 Day 18
 - 已完成并已正式提交到 GitHub：Day 1 到 Day 17
-- 已完成但未正式提交到 GitHub：暂无
-- 未完成且未提交到 GitHub：Day 18 到 Day 30
-- 下一项任务：Day 18，`docs: add retrieval troubleshooting guide`
+- 已完成但未正式提交到 GitHub：Day 18（仅在本地 `contribution-queue` 队列中）
+- 未完成且未提交到 GitHub：Day 19 到 Day 30
+- 下一项任务：Day 19，`test: cover query rewrite utility behavior`
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
 ## 每日贡献规则
@@ -77,17 +77,16 @@ git checkout -b contribution-queue
 
 ## 已完成但未正式提交到 GitHub
 
-当前没有等待发布的本地队列任务。`publish_queued_commit.ps1 -DryRun` 应显示没有剩余 `main..contribution-queue` 队列 commit。
+这些任务已在本地 `contribution-queue` 中做成独立 commit，等待 `publish_queued_commit.ps1` 后续按天 cherry-pick 到 `main` 并 push。
 
 | Day | 状态 | 本地队列提交 | 建议提交信息 | 说明 |
 |---|---|---|---|---|
-| - | - | - | - | 暂无。 |
+| 18 | Done | `queue HEAD` | `docs: add retrieval troubleshooting guide` | 新增检索排查指南，覆盖检索无结果、结果不准、Rerank 未生效、向量库配置错误和多通道召回异常。 |
 
 ## 未完成且未提交到 GitHub
 
 | Day | 状态 | 类型 | 建议提交信息 | 任务 |
 |---|---|---|---|---|
-| 18 | Todo | docs | `docs: add retrieval troubleshooting guide` | 整理检索无结果、结果不准、Rerank 未生效、向量库配置错误等常见排查路径。 |
 | 19 | Todo | test | `test: cover query rewrite utility behavior` | 为问题重写或术语映射工具补充边界测试，覆盖空输入、无匹配映射和多映射命中的情况。 |
 | 20 | Todo | docs | `docs: add resume-oriented project summary` | 以简历复盘为目标，总结项目架构、核心链路、可讲亮点、个人贡献记录和后续改造方向。 |
 | 21 | Todo | test | `test: cover ingestion node condition behavior` | 为入库 Pipeline 节点条件执行补充测试，覆盖条件跳过、条件命中和节点日志记录。 |
@@ -128,12 +127,10 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-Day 18 建议重点查看：
+Day 19 建议重点查看：
 
-- `docs/multi-channel-retrieval.md`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/retrieve/`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/retrieve/channel/`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/retrieve/postprocessor/`
-- `infra-ai/src/main/java/com/nageoffer/ai/ragent/infra/rerank/`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/rewrite/QueryTermMappingUtil.java`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/rewrite/QueryTermMappingService.java`
+- `bootstrap/src/test/java/com/nageoffer/ai/ragent/rag/rewrite/`
 
-预期产出：补充检索排查指南，覆盖检索无结果、结果不准、Rerank 未生效、向量库配置错误和多通道召回异常等场景。
+预期产出：补充问题重写或术语映射工具边界测试，覆盖空输入、无匹配映射和多映射命中等场景。
