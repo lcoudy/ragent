@@ -11,11 +11,11 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 19
+- 已完成贡献任务：Day 1 到 Day 20
 - 已完成并已正式提交到 GitHub：Day 1 到 Day 17
-- 已完成但未正式提交到 GitHub：Day 18 到 Day 19（仅在本地 `contribution-queue` 队列中）
-- 未完成且未提交到 GitHub：Day 20 到 Day 30
-- 下一项任务：Day 20，`docs: add resume-oriented project summary`
+- 已完成但未正式提交到 GitHub：Day 18 到 Day 20（仅在本地 `contribution-queue` 队列中）
+- 未完成且未提交到 GitHub：Day 21 到 Day 30
+- 下一项任务：Day 21，`test: cover ingestion node condition behavior`
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
 ## 每日贡献规则
@@ -82,13 +82,13 @@ git checkout -b contribution-queue
 | Day | 状态 | 本地队列提交 | 建议提交信息 | 说明 |
 |---|---|---|---|---|
 | 18 | Done | `de335ff` | `docs: add retrieval troubleshooting guide` | 新增检索排查指南，覆盖检索无结果、结果不准、Rerank 未生效、向量库配置错误和多通道召回异常。 |
-| 19 | Done | `queue HEAD` | `test: cover query rewrite utility behavior` | 新增术语映射工具单元测试，覆盖空输入、无匹配、多次命中、目标词防重复和多映射顺序命中。 |
+| 19 | Done | `bacf0c7` | `test: cover query rewrite utility behavior` | 新增术语映射工具单元测试，覆盖空输入、无匹配、多次命中、目标词防重复和多映射顺序命中。 |
+| 20 | Done | `queue HEAD` | `docs: add resume-oriented project summary` | 新增面向简历复盘的项目总结，覆盖架构分层、核心链路、可讲贡献点和后续改造方向。 |
 
 ## 未完成且未提交到 GitHub
 
 | Day | 状态 | 类型 | 建议提交信息 | 任务 |
 |---|---|---|---|---|
-| 20 | Todo | docs | `docs: add resume-oriented project summary` | 以简历复盘为目标，总结项目架构、核心链路、可讲亮点、个人贡献记录和后续改造方向。 |
 | 21 | Todo | test | `test: cover ingestion node condition behavior` | 为入库 Pipeline 节点条件执行补充测试，覆盖条件跳过、条件命中和节点日志记录。 |
 | 22 | Todo | docs | `docs: add frontend admin operation guide` | 整理管理后台页面、认证跳转、API service 解包、常见配置和本地联调路径。 |
 | 23 | Todo | test | `test: cover trace context propagation` | 为 RAG Trace 上下文透传补充测试，覆盖上下文初始化、嵌套调用和清理行为。 |
@@ -127,12 +127,11 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-Day 20 建议重点查看：
+Day 21 建议重点查看：
 
-- `README.md`
-- `docs/backend-module-reading-guide.md`
-- `docs/multi-channel-retrieval.md`
-- `docs/model-routing-failover.md`
-- `docs/knowledge-base-operation-guide.md`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/ingestion/engine/IngestionEngine.java`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/ingestion/engine/ConditionEvaluator.java`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/ingestion/node/IngestionNode.java`
+- `bootstrap/src/test/java/com/nageoffer/ai/ragent/ingestion/engine/`
 
-预期产出：新增面向简历复盘的项目总结，覆盖项目架构、核心链路、可讲亮点、个人贡献记录和后续改造方向。
+预期产出：新增入库 Pipeline 节点条件执行测试，覆盖条件跳过、条件命中和节点日志记录。
