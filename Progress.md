@@ -11,11 +11,11 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 22
+- 已完成贡献任务：Day 1 到 Day 23
 - 已完成并已正式提交到 GitHub：Day 1 到 Day 17
-- 已完成但未正式提交到 GitHub：Day 18 到 Day 22（仅在本地 `contribution-queue` 队列中）
-- 未完成且未提交到 GitHub：Day 23 到 Day 30
-- 下一项任务：Day 23，`test: cover trace context propagation`
+- 已完成但未正式提交到 GitHub：Day 18 到 Day 23（仅在本地 `contribution-queue` 队列中）
+- 未完成且未提交到 GitHub：Day 24 到 Day 30
+- 下一项任务：Day 24，`docs: document MCP tool extension path`
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
 ## 每日贡献规则
@@ -85,13 +85,13 @@ git checkout -b contribution-queue
 | 19 | Done | `bacf0c7` | `test: cover query rewrite utility behavior` | 新增术语映射工具单元测试，覆盖空输入、无匹配、多次命中、目标词防重复和多映射顺序命中。 |
 | 20 | Done | `6592fdf` | `docs: add resume-oriented project summary` | 新增面向简历复盘的项目总结，覆盖架构分层、核心链路、可讲贡献点和后续改造方向。 |
 | 21 | Done | `3d8a6a5` | `test: cover ingestion node condition behavior` | 新增入库引擎条件执行单元测试，覆盖条件跳过、条件命中、节点调用次数和节点日志输出。 |
-| 22 | Done | `queue HEAD` | `docs: add frontend admin operation guide` | 新增前端管理后台操作指南，覆盖后台路由、认证守卫、API 解包、service 分层和本地联调排查。 |
+| 22 | Done | `826a7a3` | `docs: add frontend admin operation guide` | 新增前端管理后台操作指南，覆盖后台路由、认证守卫、API 解包、service 分层和本地联调排查。 |
+| 23 | Done | `queue HEAD` | `test: cover trace context propagation` | 新增 RAG Trace 上下文单元测试，覆盖 trace/task 初始化、嵌套节点栈、空 pop 和 clear 清理。 |
 
 ## 未完成且未提交到 GitHub
 
 | Day | 状态 | 类型 | 建议提交信息 | 任务 |
 |---|---|---|---|---|
-| 23 | Todo | test | `test: cover trace context propagation` | 为 RAG Trace 上下文透传补充测试，覆盖上下文初始化、嵌套调用和清理行为。 |
 | 24 | Todo | docs | `docs: document MCP tool extension path` | 补充 MCP 工具扩展指南，覆盖主服务工具执行器、独立 MCP server 示例和联调排查。 |
 | 25 | Todo | test | `test: cover model health store behavior` | 为模型健康状态存储补充测试，覆盖失败计数、熔断窗口、恢复和跳过逻辑。 |
 | 26 | Todo | docs | `docs: add vector store configuration guide` | 整理 PostgreSQL pgvector 与 Milvus 配置、切换方式、初始化要求和常见错误。 |
@@ -127,10 +127,10 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-Day 23 建议重点查看：
+Day 24 建议重点查看：
 
-- `framework/src/main/java/com/nageoffer/ai/ragent/framework/trace/RagTraceContext.java`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/aop/RagTraceAspect.java`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/aop/ChatRateLimitAspect.java`
+- `docs/mcp-server-usage.md`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/mcp/`
+- `mcp-server/src/main/java/com/nageoffer/ai/ragent/mcp/`
 
-预期产出：新增 RAG Trace 上下文透传测试，覆盖初始化、嵌套节点栈和清理行为。
+预期产出：新增 MCP 工具扩展指南，覆盖主服务工具执行器、独立 MCP server 示例和联调排查。
