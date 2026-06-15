@@ -52,6 +52,7 @@ Ragent 是一个企业级 Agentic RAG 平台，覆盖从文档入库到智能问
 | 🖥️ | <a href="./docs/frontend-startup.md">前端启动与接口配置</a> | 配置 Vite、`VITE_API_BASE_URL` 和登录跳转排查 |
 | 🧭 | <a href="./docs/frontend-admin-operation-guide.md">前端管理后台操作指南</a> | 理解后台路由、页面职责、API 解包和本地联调 |
 | 🔌 | <a href="./docs/mcp-server-usage.md">MCP server 使用说明</a> | 启动独立 MCP server，理解示例工具、endpoint 和主服务工具发现流程 |
+| 🧷 | <a href="./docs/mcp-tool-extension-guide.md">MCP 工具扩展指南</a> | 新增本地或远程 MCP 工具，并排查工具发现与参数提取 |
 | 🗄️ | <a href="./docs/database-initialization.md">数据库初始化指南</a> | 初始化 PostgreSQL、pgvector、基础数据和版本升级脚本 |
 | 🔎 | <a href="./docs/rag-trace-reading-guide.md">RAG Trace 阅读指南</a> | 理解链路追踪采集、落库、查询接口和管理后台排查路径 |
 | 🧪 | <a href="./docs/retrieval-troubleshooting.md">检索排查指南</a> | 排查检索无结果、结果不准、Rerank 和向量库配置问题 |
