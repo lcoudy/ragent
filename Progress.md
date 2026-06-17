@@ -11,11 +11,11 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 25
+- 已完成贡献任务：Day 1 到 Day 26
 - 已完成并已正式提交到 GitHub：Day 1 到 Day 17
-- 已完成但未正式提交到 GitHub：Day 18 到 Day 25（仅在本地 `contribution-queue` 队列中）
-- 未完成且未提交到 GitHub：Day 26 到 Day 30
-- 下一项任务：Day 26，`docs: add vector store configuration guide`
+- 已完成但未正式提交到 GitHub：Day 18 到 Day 26（仅在本地 `contribution-queue` 队列中）
+- 未完成且未提交到 GitHub：Day 27 到 Day 30
+- 下一项任务：Day 27，`test: cover chunking edge cases`
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
 ## 每日贡献规则
@@ -88,13 +88,13 @@ git checkout -b contribution-queue
 | 22 | Done | `826a7a3` | `docs: add frontend admin operation guide` | 新增前端管理后台操作指南，覆盖后台路由、认证守卫、API 解包、service 分层和本地联调排查。 |
 | 23 | Done | `19baba0` | `test: cover trace context propagation` | 新增 RAG Trace 上下文单元测试，覆盖 trace/task 初始化、嵌套节点栈、空 pop 和 clear 清理。 |
 | 24 | Done | `7b98441` | `docs: document MCP tool extension path` | 新增 MCP 工具扩展指南，覆盖主服务本地执行器、独立 MCP server 远程工具、参数提取和联调排查。 |
-| 25 | Done | `queue HEAD` | `test: cover model health store behavior` | 新增模型健康状态存储测试，覆盖失败阈值、熔断窗口、半开单次探测、成功恢复和半开失败重开。 |
+| 25 | Done | `1294c75` | `test: cover model health store behavior` | 新增模型健康状态存储测试，覆盖失败阈值、熔断窗口、半开单次探测、成功恢复和半开失败重开。 |
+| 26 | Done | `queue HEAD` | `docs: add vector store configuration guide` | 新增向量库配置指南，覆盖 PostgreSQL pgvector、Milvus、切换流程、embedding 维度和常见错误。 |
 
 ## 未完成且未提交到 GitHub
 
 | Day | 状态 | 类型 | 建议提交信息 | 任务 |
 |---|---|---|---|---|
-| 26 | Todo | docs | `docs: add vector store configuration guide` | 整理 PostgreSQL pgvector 与 Milvus 配置、切换方式、初始化要求和常见错误。 |
 | 27 | Todo | test | `test: cover chunking edge cases` | 为文本清理或分块工具补充边界测试，覆盖短文本、空白文本、重叠窗口和超长段落。 |
 | 28 | Todo | docs | `docs: add API response contract guide` | 说明后端 `Result` 响应格式、错误码、前端 Axios 解包和认证失效处理。 |
 | 29 | Todo | test | `test: cover session memory boundaries` | 为聊天会话记忆补充边界测试，覆盖空历史、历史截断和多轮上下文拼接。 |
@@ -127,12 +127,10 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-Day 26 建议重点查看：
+Day 27 建议重点查看：
 
-- `bootstrap/src/main/resources/application.yaml`
-- `docs/database-initialization.md`
-- `resources/docker/`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/vector/`
-- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/retrieve/`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/core/chunk/strategy/FixedSizeTextChunker.java`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/core/chunk/strategy/StructureAwareTextChunker.java`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/core/chunk/FixedSizeOptions.java`
 
-预期产出：新增向量库配置指南，覆盖 PostgreSQL pgvector、Milvus、切换方式、初始化要求和常见错误。
+预期产出：新增分块工具边界测试，覆盖空白文本、短文本、重叠窗口和超长段落。
