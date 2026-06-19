@@ -11,11 +11,11 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 27
+- 已完成贡献任务：Day 1 到 Day 28
 - 已完成并已正式提交到 GitHub：Day 1 到 Day 17
-- 已完成但未正式提交到 GitHub：Day 18 到 Day 27（仅在本地 `contribution-queue` 队列中）
-- 未完成且未提交到 GitHub：Day 28 到 Day 30
-- 下一项任务：Day 28，`docs: add API response contract guide`
+- 已完成但未正式提交到 GitHub：Day 18 到 Day 28（仅在本地 `contribution-queue` 队列中）
+- 未完成且未提交到 GitHub：Day 29 到 Day 30
+- 下一项任务：Day 29，`test: cover session memory boundaries`
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
 ## 每日贡献规则
@@ -90,13 +90,13 @@ git checkout -b contribution-queue
 | 24 | Done | `7b98441` | `docs: document MCP tool extension path` | 新增 MCP 工具扩展指南，覆盖主服务本地执行器、独立 MCP server 远程工具、参数提取和联调排查。 |
 | 25 | Done | `1294c75` | `test: cover model health store behavior` | 新增模型健康状态存储测试，覆盖失败阈值、熔断窗口、半开单次探测、成功恢复和半开失败重开。 |
 | 26 | Done | `c324210` | `docs: add vector store configuration guide` | 新增向量库配置指南，覆盖 PostgreSQL pgvector、Milvus、切换流程、embedding 维度和常见错误。 |
-| 27 | Done | `queue HEAD` | `test: cover chunking edge cases` | 新增固定大小分块器边界测试，覆盖空白文本、短文本、重叠窗口、超长段落和禁用切分。 |
+| 27 | Done | `18895a9` | `test: cover chunking edge cases` | 新增固定大小分块器边界测试，覆盖空白文本、短文本、重叠窗口、超长段落和禁用切分。 |
+| 28 | Done | `queue HEAD` | `docs: add API response contract guide` | 新增 API 响应契约指南，覆盖后端统一响应、错误码、全局异常、前端 Axios 解包和认证失效处理。 |
 
 ## 未完成且未提交到 GitHub
 
 | Day | 状态 | 类型 | 建议提交信息 | 任务 |
 |---|---|---|---|---|
-| 28 | Todo | docs | `docs: add API response contract guide` | 说明后端 `Result` 响应格式、错误码、前端 Axios 解包和认证失效处理。 |
 | 29 | Todo | test | `test: cover session memory boundaries` | 为聊天会话记忆补充边界测试，覆盖空历史、历史截断和多轮上下文拼接。 |
 | 30 | Todo | docs | `docs: add release and contribution workflow guide` | 总结队列分支、每日发布脚本、检查命令、失败恢复和进度维护规则。 |
 
@@ -127,11 +127,10 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-Day 28 建议重点查看：
+Day 29 建议重点查看：
 
-- `framework/src/main/java/com/nageoffer/ai/ragent/framework/convention/result/`
-- `framework/src/main/java/com/nageoffer/ai/ragent/framework/exception/`
-- `frontend/src/services/api.ts`
-- `docs/frontend-admin-operation-guide.md`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/memory/DefaultConversationMemoryService.java`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/core/memory/JdbcConversationMemoryStore.java`
+- `bootstrap/src/main/java/com/nageoffer/ai/ragent/rag/config/MemoryProperties.java`
 
-预期产出：新增 API 响应契约指南，说明后端统一响应、错误码、前端解包和认证失效处理。
+预期产出：新增聊天会话记忆边界测试，覆盖空历史、摘要拼接、异常降级和 append 触发摘要压缩。
