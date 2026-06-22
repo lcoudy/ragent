@@ -11,11 +11,11 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 30
-- 已完成并已正式提交到 GitHub：Day 1 到 Day 17
-- 已完成但未正式提交到 GitHub：Day 18 到 Day 30（仅在本地 `contribution-queue` 队列中）
-- 未完成且未提交到 GitHub：暂无
-- 下一项任务：暂无；后续优先按天发布本地队列中的 Day 18
+- 已完成贡献任务：Day 1 到 Day 31
+- 已完成并已正式提交到 GitHub：Day 1 到 Day 23
+- 已完成但未正式提交到 GitHub：Day 24 到 Day 31（仅在本地 `contribution-queue` 队列中）
+- 未完成且未提交到 GitHub：Day 32 到 Day 40
+- 下一项任务：Day 32，`test: cover rerank post processor behavior`
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
 ## 每日贡献规则
@@ -74,6 +74,12 @@ git checkout -b contribution-queue
 | 15 | Done | `b28a97d` | 新增模型供应商配置指南，覆盖 Chat、Embedding、Rerank 模型候选、API Key、优先级、故障切换和常见配置错误。 |
 | 16 | Done | `6800eb5` | 新增模型路由故障切换测试，覆盖候选失败后继续尝试下一个模型，以及已熔断候选跳过规则。 |
 | 17 | Done | `57e2f71` | 新增知识库操作指南，覆盖知识库、文档、分块、定时刷新、后台入口和常见排查路径。 |
+| 18 | Done | `7e8a598` | 新增检索排查指南，覆盖检索无结果、结果不准、Rerank 未生效、向量库配置错误和多通道召回异常。 |
+| 19 | Done | `9663630` | 新增术语映射工具单元测试，覆盖空输入、无匹配、多次命中、目标词防重复和多映射顺序命中。 |
+| 20 | Done | `2a0dcb4` | 新增面向简历复盘的项目总结，覆盖架构分层、核心链路、可讲贡献点和后续改造方向。 |
+| 21 | Done | `c0d39be` | 新增入库引擎条件执行单元测试，覆盖条件跳过、条件命中、节点调用次数和节点日志输出。 |
+| 22 | Done | `18bbba7` | 新增前端管理后台操作指南，覆盖后台路由、认证守卫、API 解包、service 分层和本地联调排查。 |
+| 23 | Done | `5a1f01c` | 新增 RAG Trace 上下文单元测试，覆盖 trace/task 初始化、嵌套节点栈、空 pop 和 clear 清理。 |
 
 ## 已完成但未正式提交到 GitHub
 
@@ -81,42 +87,46 @@ git checkout -b contribution-queue
 
 | Day | 状态 | 本地队列提交 | 建议提交信息 | 说明 |
 |---|---|---|---|---|
-| 18 | Done | `6beb5e0` | `docs: add retrieval troubleshooting guide` | 新增检索排查指南，覆盖检索无结果、结果不准、Rerank 未生效、向量库配置错误和多通道召回异常。 |
-| 19 | Done | `ddc5284` | `test: cover query rewrite utility behavior` | 新增术语映射工具单元测试，覆盖空输入、无匹配、多次命中、目标词防重复和多映射顺序命中。 |
-| 20 | Done | `92448b2` | `docs: add resume-oriented project summary` | 新增面向简历复盘的项目总结，覆盖架构分层、核心链路、可讲贡献点和后续改造方向。 |
-| 21 | Done | `0c3cf2d` | `test: cover ingestion node condition behavior` | 新增入库引擎条件执行单元测试，覆盖条件跳过、条件命中、节点调用次数和节点日志输出。 |
-| 22 | Done | `bb47554` | `docs: add frontend admin operation guide` | 新增前端管理后台操作指南，覆盖后台路由、认证守卫、API 解包、service 分层和本地联调排查。 |
-| 23 | Done | `6a2e130` | `test: cover trace context propagation` | 新增 RAG Trace 上下文单元测试，覆盖 trace/task 初始化、嵌套节点栈、空 pop 和 clear 清理。 |
 | 24 | Done | `d50f10f` | `docs: document MCP tool extension path` | 新增 MCP 工具扩展指南，覆盖主服务本地执行器、独立 MCP server 远程工具、参数提取和联调排查。 |
 | 25 | Done | `1389207` | `test: cover model health store behavior` | 新增模型健康状态存储测试，覆盖失败阈值、熔断窗口、半开单次探测、成功恢复和半开失败重开。 |
 | 26 | Done | `b5185d2` | `docs: add vector store configuration guide` | 新增向量库配置指南，覆盖 PostgreSQL pgvector、Milvus、切换流程、embedding 维度和常见错误。 |
 | 27 | Done | `98a0be8` | `test: cover chunking edge cases` | 新增固定大小分块器边界测试，覆盖空白文本、短文本、重叠窗口、超长段落和禁用切分。 |
 | 28 | Done | `cd39a6d` | `docs: add API response contract guide` | 新增 API 响应契约指南，覆盖后端统一响应、错误码、全局异常、前端 Axios 解包和认证失效处理。 |
 | 29 | Done | `fb18aa0` | `test: cover session memory boundaries` | 新增会话记忆边界测试，覆盖空参数、空历史、摘要拼接、异常降级、append 压缩和历史截断。 |
-| 30 | Done | `queue HEAD` | `docs: add release and contribution workflow guide` | 新增发布与贡献流程指南，覆盖队列分支、每日发布脚本、检查命令、失败恢复和进度维护规则。 |
+| 30 | Done | `797dc17` | `docs: add release and contribution workflow guide` | 新增发布与贡献流程指南，覆盖队列分支、每日发布脚本、检查命令、失败恢复和进度维护规则。 |
+| 31 | Done | `queue HEAD` | `docs: explain RAG chat request flow` | 新增 RAG 问答请求链路说明，串联 SSE、会话记忆、问题改写、意图解析、检索、Prompt、模型输出和停止任务。 |
 
 ## 未完成且未提交到 GitHub
 
 | Day | 状态 | 类型 | 建议提交信息 | 任务 |
 |---|---|---|---|---|
-| - | - | - | - | 暂无。 |
+| 32 | Todo | test | `test: cover rerank post processor behavior` | 为 Rerank 后处理器补充单元测试，覆盖空结果跳过、问题选择、topK 透传和精排结果返回。 |
+| 33 | Todo | docs | `docs: add prompt template guide` | 新增 Prompt 模板指南，覆盖模板位置、section 语法、变量替换、场景选择和排查方式。 |
+| 34 | Todo | test | `test: cover prompt template loading` | 为 Prompt 模板加载器补充测试，覆盖资源加载缓存、变量渲染、section 渲染和缺失 section。 |
+| 35 | Todo | docs | `docs: add local troubleshooting FAQ` | 新增本地开发排查 FAQ，覆盖 Java、Maven、Node、数据库、中间件、模型 Key 和 SSE 常见问题。 |
+| 36 | Todo | test | `test: cover file type detection` | 为 MIME 类型识别补充测试，覆盖空字节、PDF magic、文本文件和无文件名识别。 |
+| 37 | Todo | docs | `docs: add query rewrite and term mapping guide` | 新增问题改写与术语映射指南，覆盖改写输入、术语替换、拆分、配置入口和排查路径。 |
+| 38 | Todo | test | `test: cover JSON response parser behavior` | 为 LLM JSON 响应解析补充测试，覆盖 markdown fence、正文包裹 JSON、非法输入和类型不匹配。 |
+| 39 | Todo | docs | `docs: add ingestion pipeline extension guide` | 新增入库 Pipeline 扩展指南，覆盖节点接口、条件表达式、上下文传递、日志和调试。 |
+| 40 | Todo | test | `test: cover LLM response cleaner behavior` | 为 LLM 输出清理工具补充测试，覆盖语言标记代码块、普通代码块、空值和普通文本。 |
 
 ## 最近提交
 
 ```text
-queue HEAD docs: add release and contribution workflow guide (queued)
+queue HEAD docs: explain RAG chat request flow (queued)
+797dc17 docs: add release and contribution workflow guide (queued)
 fb18aa0 test: cover session memory boundaries (queued)
 cd39a6d docs: add API response contract guide (queued)
 98a0be8 test: cover chunking edge cases (queued)
 b5185d2 docs: add vector store configuration guide (queued)
 1389207 test: cover model health store behavior (queued)
 d50f10f docs: document MCP tool extension path (queued)
-6a2e130 test: cover trace context propagation (queued)
-bb47554 docs: add frontend admin operation guide (queued)
-0c3cf2d test: cover ingestion node condition behavior (queued)
-92448b2 docs: add resume-oriented project summary (queued)
-ddc5284 test: cover query rewrite utility behavior (queued)
-6beb5e0 docs: add retrieval troubleshooting guide (queued)
+5a1f01c test: cover trace context propagation
+18bbba7 docs: add frontend admin operation guide
+c0d39be test: cover ingestion node condition behavior
+2a0dcb4 docs: add resume-oriented project summary
+9663630 test: cover query rewrite utility behavior
+7e8a598 docs: add retrieval troubleshooting guide
 57e2f71 docs: add knowledge base operation guide
 6800eb5 test: cover model routing fallback behavior
 b28a97d docs: add model provider configuration guide
@@ -141,11 +151,10 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-当前 Day 18 到 Day 30 已在本地 `contribution-queue` 做成独立 commit。下一步建议优先发布 Day 18：
+当前 Day 24 到 Day 31 已在本地 `contribution-queue` 做成独立 commit，Day 32 到 Day 40 已完成规划。下一项任务是 Day 32：`test: cover rerank post processor behavior`。
 
 ```powershell
-./publish_queued_commit.ps1 -DryRun
-./publish_queued_commit.ps1 -CheckCommand "git diff --check"
+./mvnw.cmd -pl bootstrap -Dtest=RerankPostProcessorTest test
 ```
 
-发布前确认工作区干净，并根据当天发布 commit 的改动范围选择更具体的检查命令。
+完成后更新本文件，并继续保持一个任务一个独立 commit。
