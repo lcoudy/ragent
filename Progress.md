@@ -11,11 +11,11 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 31
+- 已完成贡献任务：Day 1 到 Day 32
 - 已完成并已正式提交到 GitHub：Day 1 到 Day 23
-- 已完成但未正式提交到 GitHub：Day 24 到 Day 31（仅在本地 `contribution-queue` 队列中）
-- 未完成且未提交到 GitHub：Day 32 到 Day 40
-- 下一项任务：Day 32，`test: cover rerank post processor behavior`
+- 已完成但未正式提交到 GitHub：Day 24 到 Day 32（仅在本地 `contribution-queue` 队列中）
+- 未完成且未提交到 GitHub：Day 33 到 Day 40
+- 下一项任务：Day 33，`docs: add prompt template guide`
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
 ## 每日贡献规则
@@ -94,13 +94,13 @@ git checkout -b contribution-queue
 | 28 | Done | `cd39a6d` | `docs: add API response contract guide` | 新增 API 响应契约指南，覆盖后端统一响应、错误码、全局异常、前端 Axios 解包和认证失效处理。 |
 | 29 | Done | `fb18aa0` | `test: cover session memory boundaries` | 新增会话记忆边界测试，覆盖空参数、空历史、摘要拼接、异常降级、append 压缩和历史截断。 |
 | 30 | Done | `797dc17` | `docs: add release and contribution workflow guide` | 新增发布与贡献流程指南，覆盖队列分支、每日发布脚本、检查命令、失败恢复和进度维护规则。 |
-| 31 | Done | `queue HEAD` | `docs: explain RAG chat request flow` | 新增 RAG 问答请求链路说明，串联 SSE、会话记忆、问题改写、意图解析、检索、Prompt、模型输出和停止任务。 |
+| 31 | Done | `70b33db` | `docs: explain RAG chat request flow` | 新增 RAG 问答请求链路说明，串联 SSE、会话记忆、问题改写、意图解析、检索、Prompt、模型输出和停止任务。 |
+| 32 | Done | `queue HEAD` | `test: cover rerank post processor behavior` | 新增 Rerank 后处理器单元测试，覆盖空结果跳过、重写问题优先、原始问题兜底、topK 透传和精排结果返回。 |
 
 ## 未完成且未提交到 GitHub
 
 | Day | 状态 | 类型 | 建议提交信息 | 任务 |
 |---|---|---|---|---|
-| 32 | Todo | test | `test: cover rerank post processor behavior` | 为 Rerank 后处理器补充单元测试，覆盖空结果跳过、问题选择、topK 透传和精排结果返回。 |
 | 33 | Todo | docs | `docs: add prompt template guide` | 新增 Prompt 模板指南，覆盖模板位置、section 语法、变量替换、场景选择和排查方式。 |
 | 34 | Todo | test | `test: cover prompt template loading` | 为 Prompt 模板加载器补充测试，覆盖资源加载缓存、变量渲染、section 渲染和缺失 section。 |
 | 35 | Todo | docs | `docs: add local troubleshooting FAQ` | 新增本地开发排查 FAQ，覆盖 Java、Maven、Node、数据库、中间件、模型 Key 和 SSE 常见问题。 |
@@ -113,7 +113,8 @@ git checkout -b contribution-queue
 ## 最近提交
 
 ```text
-queue HEAD docs: explain RAG chat request flow (queued)
+queue HEAD test: cover rerank post processor behavior (queued)
+70b33db docs: explain RAG chat request flow (queued)
 797dc17 docs: add release and contribution workflow guide (queued)
 fb18aa0 test: cover session memory boundaries (queued)
 cd39a6d docs: add API response contract guide (queued)
@@ -151,10 +152,10 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-当前 Day 24 到 Day 31 已在本地 `contribution-queue` 做成独立 commit，Day 32 到 Day 40 已完成规划。下一项任务是 Day 32：`test: cover rerank post processor behavior`。
+当前 Day 24 到 Day 32 已在本地 `contribution-queue` 做成独立 commit，Day 33 到 Day 40 已完成规划。下一项任务是 Day 33：`docs: add prompt template guide`。
 
 ```powershell
-./mvnw.cmd -pl bootstrap -Dtest=RerankPostProcessorTest test
+git diff --check
 ```
 
 完成后更新本文件，并继续保持一个任务一个独立 commit。
