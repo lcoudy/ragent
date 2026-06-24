@@ -55,6 +55,7 @@ Ragent 是一个企业级 Agentic RAG 平台，覆盖从文档入库到智能问
 | 🧷 | <a href="./docs/mcp-tool-extension-guide.md">MCP 工具扩展指南</a> | 新增本地或远程 MCP 工具，并排查工具发现与参数提取 |
 | 📡 | <a href="./docs/api-response-contract.md">API 响应契约指南</a> | 说明 `Result` 响应、错误码、前端解包和认证失效处理 |
 | 💬 | <a href="./docs/rag-chat-request-flow.md">RAG 问答请求链路说明</a> | 串联 SSE、会话记忆、改写、意图、检索、Prompt 和模型输出 |
+| 🧾 | <a href="./docs/prompt-template-guide.md">Prompt 模板指南</a> | 理解模板路径、section、变量替换、场景选择和排查方式 |
 | 🗄️ | <a href="./docs/database-initialization.md">数据库初始化指南</a> | 初始化 PostgreSQL、pgvector、基础数据和版本升级脚本 |
 | 🧮 | <a href="./docs/vector-store-configuration.md">向量库配置指南</a> | 配置 pgvector、Milvus、向量维度和切换后的重建流程 |
 | 🔎 | <a href="./docs/rag-trace-reading-guide.md">RAG Trace 阅读指南</a> | 理解链路追踪采集、落库、查询接口和管理后台排查路径 |
