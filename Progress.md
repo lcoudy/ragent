@@ -11,11 +11,11 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 35
+- 已完成贡献任务：Day 1 到 Day 36
 - 已完成并已正式提交到 GitHub：Day 1 到 Day 23
-- 已完成但未正式提交到 GitHub：Day 24 到 Day 35（仅在本地 `contribution-queue` 队列中）
-- 未完成且未提交到 GitHub：Day 36 到 Day 40
-- 下一项任务：Day 36，`test: cover file type detection`
+- 已完成但未正式提交到 GitHub：Day 24 到 Day 36（仅在本地 `contribution-queue` 队列中）
+- 未完成且未提交到 GitHub：Day 37 到 Day 40
+- 下一项任务：Day 37，`docs: add query rewrite and term mapping guide`
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
 ## 每日贡献规则
@@ -98,13 +98,13 @@ git checkout -b contribution-queue
 | 32 | Done | `6833630` | `test: cover rerank post processor behavior` | 新增 Rerank 后处理器单元测试，覆盖空结果跳过、重写问题优先、原始问题兜底、topK 透传和精排结果返回。 |
 | 33 | Done | `db81c31` | `docs: add prompt template guide` | 新增 Prompt 模板指南，覆盖模板位置、section 语法、变量替换、RAG 场景选择、自定义意图模板和排查方式。 |
 | 34 | Done | `4863cf4` | `test: cover prompt template loading` | 新增 Prompt 模板加载器单元测试，覆盖 classpath 加载缓存、变量渲染、section 渲染和缺失 section 报错。 |
-| 35 | Done | `queue HEAD` | `docs: add local troubleshooting FAQ` | 新增本地开发排查 FAQ，覆盖 Java、Maven、Node、数据库、中间件、向量库、模型 Key 和 SSE 常见问题。 |
+| 35 | Done | `3b837fe` | `docs: add local troubleshooting FAQ` | 新增本地开发排查 FAQ，覆盖 Java、Maven、Node、数据库、中间件、向量库、模型 Key 和 SSE 常见问题。 |
+| 36 | Done | `queue HEAD` | `test: cover file type detection` | 新增 MIME 类型识别单元测试，覆盖空字节、PDF magic、纯文本文件和无文件名内容识别。 |
 
 ## 未完成且未提交到 GitHub
 
 | Day | 状态 | 类型 | 建议提交信息 | 任务 |
 |---|---|---|---|---|
-| 36 | Todo | test | `test: cover file type detection` | 为 MIME 类型识别补充测试，覆盖空字节、PDF magic、文本文件和无文件名识别。 |
 | 37 | Todo | docs | `docs: add query rewrite and term mapping guide` | 新增问题改写与术语映射指南，覆盖改写输入、术语替换、拆分、配置入口和排查路径。 |
 | 38 | Todo | test | `test: cover JSON response parser behavior` | 为 LLM JSON 响应解析补充测试，覆盖 markdown fence、正文包裹 JSON、非法输入和类型不匹配。 |
 | 39 | Todo | docs | `docs: add ingestion pipeline extension guide` | 新增入库 Pipeline 扩展指南，覆盖节点接口、条件表达式、上下文传递、日志和调试。 |
@@ -113,7 +113,8 @@ git checkout -b contribution-queue
 ## 最近提交
 
 ```text
-queue HEAD docs: add local troubleshooting FAQ (queued)
+queue HEAD test: cover file type detection (queued)
+3b837fe docs: add local troubleshooting FAQ (queued)
 4863cf4 test: cover prompt template loading (queued)
 db81c31 docs: add prompt template guide (queued)
 6833630 test: cover rerank post processor behavior (queued)
@@ -155,10 +156,10 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-当前 Day 24 到 Day 35 已在本地 `contribution-queue` 做成独立 commit，Day 36 到 Day 40 已完成规划。下一项任务是 Day 36：`test: cover file type detection`。
+当前 Day 24 到 Day 36 已在本地 `contribution-queue` 做成独立 commit，Day 37 到 Day 40 已完成规划。下一项任务是 Day 37：`docs: add query rewrite and term mapping guide`。
 
 ```powershell
-./mvnw.cmd -pl bootstrap -am -Dtest=MimeTypeDetectorTest "-Dsurefire.failIfNoSpecifiedTests=false" test
+git diff --check
 ```
 
 完成后更新本文件，并继续保持一个任务一个独立 commit。
