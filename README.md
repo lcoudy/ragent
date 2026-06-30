@@ -69,6 +69,7 @@ Ragent 是一个企业级 Agentic RAG 平台，覆盖从文档入库到智能问
 | ⚙️ | <a href="./docs/model-provider-configuration.md">模型供应商配置指南</a> | 配置 Chat、Embedding、Rerank 模型候选、API Key、优先级和故障切换 |
 | 🧠 | <a href="./docs/model-routing-failover.md">模型路由与故障切换说明</a> | 理解模型候选选择、健康检查、熔断降级和首包探测 |
 | 🛠️ | <a href="./docs/ingestion-pipeline-troubleshooting.md">文档摄取 Pipeline 排查指南</a> | 排查节点连线、任务失败和节点日志 |
+| 🧱 | <a href="./docs/ingestion-pipeline-extension-guide.md">入库 Pipeline 扩展指南</a> | 扩展节点接口、条件表达式、上下文传递、日志和测试 |
 | 📝 | <a href="https://nageoffer.com/ragent/interview/" target="_blank">简历怎么写</a> | 项目如何写到简历上 |
 | 💡 | <a href="https://nageoffer.com/ragent/why-springai-langchain4j/" target="_blank">为什么不用 Spring AI / LangChain4j</a> | 技术选型的思考 |
 
