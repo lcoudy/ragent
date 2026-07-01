@@ -66,6 +66,7 @@ Ragent 是一个企业级 Agentic RAG 平台，覆盖从文档入库到智能问
 | 📝 | <a href="./docs/resume-oriented-project-summary.md">项目简历复盘摘要</a> | 总结架构、核心链路、可讲亮点和后续改造方向 |
 | 🧰 | <a href="./docs/contribution-friendly-task-list.md">适合继续贡献的任务清单</a> | 按文档、测试、小型 bugfix、前端体验和后端 AI 工程分类后续任务 |
 | 🗓️ | <a href="./docs/release-and-contribution-workflow.md">发布与贡献流程指南</a> | 维护队列分支、每日发布脚本、检查命令和进度状态 |
+| 🚢 | <a href="./docs/production-deployment-checklist.md">生产部署检查清单</a> | 核对环境依赖、配置、发布验证、冒烟流程和回滚准备 |
 | ⚙️ | <a href="./docs/model-provider-configuration.md">模型供应商配置指南</a> | 配置 Chat、Embedding、Rerank 模型候选、API Key、优先级和故障切换 |
 | 🧠 | <a href="./docs/model-routing-failover.md">模型路由与故障切换说明</a> | 理解模型候选选择、健康检查、熔断降级和首包探测 |
 | 🛠️ | <a href="./docs/ingestion-pipeline-troubleshooting.md">文档摄取 Pipeline 排查指南</a> | 排查节点连线、任务失败和节点日志 |

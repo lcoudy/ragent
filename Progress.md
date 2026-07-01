@@ -11,11 +11,11 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 40
-- 已完成并已正式提交到 GitHub：Day 1 到 Day 23
-- 已完成但未正式提交到 GitHub：Day 24 到 Day 40（仅在本地 `contribution-queue` 队列中）
+- 已完成贡献任务：Day 1 到 Day 41
+- 已完成并已正式提交到 GitHub：Day 1 到 Day 29
+- 已完成但未正式提交到 GitHub：Day 30 到 Day 41（仅在本地 `contribution-queue` 队列中）
 - 未完成且未提交到 GitHub：暂无
-- 下一项任务：暂无；后续优先按天发布本地队列中的 Day 24
+- 下一项任务：暂无；后续优先按天发布本地队列中的 Day 30
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
 
 ## 每日贡献规则
@@ -80,6 +80,12 @@ git checkout -b contribution-queue
 | 21 | Done | `c0d39be` | 新增入库引擎条件执行单元测试，覆盖条件跳过、条件命中、节点调用次数和节点日志输出。 |
 | 22 | Done | `18bbba7` | 新增前端管理后台操作指南，覆盖后台路由、认证守卫、API 解包、service 分层和本地联调排查。 |
 | 23 | Done | `5a1f01c` | 新增 RAG Trace 上下文单元测试，覆盖 trace/task 初始化、嵌套节点栈、空 pop 和 clear 清理。 |
+| 24 | Done | `f9a3f58` | 新增 MCP 工具扩展指南，覆盖主服务本地执行器、独立 MCP server 远程工具、参数提取和联调排查。 |
+| 25 | Done | `eb4bb1a` | 新增模型健康状态存储测试，覆盖失败阈值、熔断窗口、半开单次探测、成功恢复和半开失败重开。 |
+| 26 | Done | `6a5ea91` | 新增向量库配置指南，覆盖 PostgreSQL pgvector、Milvus、切换流程、embedding 维度和常见错误。 |
+| 27 | Done | `e563d0c` | 新增固定大小分块器边界测试，覆盖空白文本、短文本、重叠窗口、超长段落和禁用切分。 |
+| 28 | Done | `1350ed2` | 新增 API 响应契约指南，覆盖后端统一响应、错误码、前端 Axios 解包和认证失效处理。 |
+| 29 | Done | `e70d26f` | 新增会话记忆边界测试，覆盖空参数、空历史、摘要拼接、异常降级、append 压缩和历史截断。 |
 
 ## 已完成但未正式提交到 GitHub
 
@@ -87,12 +93,6 @@ git checkout -b contribution-queue
 
 | Day | 状态 | 本地队列提交 | 建议提交信息 | 说明 |
 |---|---|---|---|---|
-| 24 | Done | `d50f10f` | `docs: document MCP tool extension path` | 新增 MCP 工具扩展指南，覆盖主服务本地执行器、独立 MCP server 远程工具、参数提取和联调排查。 |
-| 25 | Done | `1389207` | `test: cover model health store behavior` | 新增模型健康状态存储测试，覆盖失败阈值、熔断窗口、半开单次探测、成功恢复和半开失败重开。 |
-| 26 | Done | `b5185d2` | `docs: add vector store configuration guide` | 新增向量库配置指南，覆盖 PostgreSQL pgvector、Milvus、切换流程、embedding 维度和常见错误。 |
-| 27 | Done | `98a0be8` | `test: cover chunking edge cases` | 新增固定大小分块器边界测试，覆盖空白文本、短文本、重叠窗口、超长段落和禁用切分。 |
-| 28 | Done | `cd39a6d` | `docs: add API response contract guide` | 新增 API 响应契约指南，覆盖后端统一响应、错误码、全局异常、前端 Axios 解包和认证失效处理。 |
-| 29 | Done | `fb18aa0` | `test: cover session memory boundaries` | 新增会话记忆边界测试，覆盖空参数、空历史、摘要拼接、异常降级、append 压缩和历史截断。 |
 | 30 | Done | `797dc17` | `docs: add release and contribution workflow guide` | 新增发布与贡献流程指南，覆盖队列分支、每日发布脚本、检查命令、失败恢复和进度维护规则。 |
 | 31 | Done | `70b33db` | `docs: explain RAG chat request flow` | 新增 RAG 问答请求链路说明，串联 SSE、会话记忆、问题改写、意图解析、检索、Prompt、模型输出和停止任务。 |
 | 32 | Done | `6833630` | `test: cover rerank post processor behavior` | 新增 Rerank 后处理器单元测试，覆盖空结果跳过、重写问题优先、原始问题兜底、topK 透传和精排结果返回。 |
@@ -103,7 +103,8 @@ git checkout -b contribution-queue
 | 37 | Done | `4527a6e` | `docs: add query rewrite and term mapping guide` | 新增问题改写与术语映射指南，覆盖术语归一化、缓存、LLM 改写、多问句拆分、下游影响和排查路径。 |
 | 38 | Done | `db5b0d2` | `test: cover JSON response parser behavior` | 新增 LLM JSON 响应解析单元测试，覆盖 markdown fence、正文包裹 JSON、非法输入和类型不匹配。 |
 | 39 | Done | `1a9bfe3` | `docs: add ingestion pipeline extension guide` | 新增入库 Pipeline 扩展指南，覆盖节点接口、线性链路、条件表达式、上下文传递、节点日志、知识库链路和测试建议。 |
-| 40 | Done | `queue HEAD` | `test: cover LLM response cleaner behavior` | 新增 LLM 输出清理工具单元测试，覆盖空值、语言标记代码块、普通代码块、连字符语言名和普通文本。 |
+| 40 | Done | `8cc4825` | `test: cover LLM response cleaner behavior` | 新增 LLM 输出清理工具单元测试，覆盖空值、语言标记代码块、普通代码块、连字符语言名和普通文本。 |
+| 41 | Done | `queue HEAD` | `docs: add production deployment checklist` | 新增生产部署检查清单，覆盖环境基线、中间件、配置核对、发布验证、冒烟流程和回滚准备。 |
 
 ## 未完成且未提交到 GitHub
 
@@ -114,7 +115,8 @@ git checkout -b contribution-queue
 ## 最近提交
 
 ```text
-queue HEAD test: cover LLM response cleaner behavior (queued)
+queue HEAD docs: add production deployment checklist (queued)
+8cc4825 test: cover LLM response cleaner behavior (queued)
 1a9bfe3 docs: add ingestion pipeline extension guide (queued)
 db5b0d2 test: cover JSON response parser behavior (queued)
 4527a6e docs: add query rewrite and term mapping guide (queued)
@@ -125,12 +127,12 @@ db81c31 docs: add prompt template guide (queued)
 6833630 test: cover rerank post processor behavior (queued)
 70b33db docs: explain RAG chat request flow (queued)
 797dc17 docs: add release and contribution workflow guide (queued)
-fb18aa0 test: cover session memory boundaries (queued)
-cd39a6d docs: add API response contract guide (queued)
-98a0be8 test: cover chunking edge cases (queued)
-b5185d2 docs: add vector store configuration guide (queued)
-1389207 test: cover model health store behavior (queued)
-d50f10f docs: document MCP tool extension path (queued)
+e70d26f test: cover session memory boundaries
+1350ed2 docs: add API response contract guide
+e563d0c test: cover chunking edge cases
+6a5ea91 docs: add vector store configuration guide
+eb4bb1a test: cover model health store behavior
+f9a3f58 docs: document MCP tool extension path
 5a1f01c test: cover trace context propagation
 18bbba7 docs: add frontend admin operation guide
 c0d39be test: cover ingestion node condition behavior
@@ -161,7 +163,7 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-当前 Day 24 到 Day 40 已在本地 `contribution-queue` 做成独立 commit。下一步建议优先发布 Day 24：
+当前 Day 30 到 Day 41 已在本地 `contribution-queue` 做成独立 commit。下一步建议优先发布 Day 30：
 
 ```powershell
 ./publish_queued_commit.ps1 -DryRun
