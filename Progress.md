@@ -11,9 +11,9 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 42
+- 已完成贡献任务：Day 1 到 Day 43
 - 已完成并已正式提交到 GitHub：Day 1 到 Day 29
-- 已完成但未正式提交到 GitHub：Day 30 到 Day 42（仅在本地 `contribution-queue` 队列中）
+- 已完成但未正式提交到 GitHub：Day 30 到 Day 43（仅在本地 `contribution-queue` 队列中）
 - 未完成且未提交到 GitHub：暂无
 - 下一项任务：暂无；后续优先按天发布本地队列中的 Day 30
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
@@ -105,7 +105,8 @@ git checkout -b contribution-queue
 | 39 | Done | `1a9bfe3` | `docs: add ingestion pipeline extension guide` | 新增入库 Pipeline 扩展指南，覆盖节点接口、线性链路、条件表达式、上下文传递、节点日志、知识库链路和测试建议。 |
 | 40 | Done | `8cc4825` | `test: cover LLM response cleaner behavior` | 新增 LLM 输出清理工具单元测试，覆盖空值、语言标记代码块、普通代码块、连字符语言名和普通文本。 |
 | 41 | Done | `ef30057` | `docs: add production deployment checklist` | 新增生产部署检查清单，覆盖环境基线、中间件、配置核对、发布验证、冒烟流程和回滚准备。 |
-| 42 | Done | `queue HEAD` | `test: cover text cleanup utility behavior` | 新增文本清理工具单元测试，覆盖空输入、BOM、行尾空白、连续空行和自定义清理开关。 |
+| 42 | Done | `10fd402` | `test: cover text cleanup utility behavior` | 新增文本清理工具单元测试，覆盖空输入、BOM、行尾空白、连续空行和自定义清理开关。 |
+| 43 | Done | `queue HEAD` | `docs: explain knowledge schedule refresh lifecycle` | 新增知识库定时刷新生命周期说明，覆盖计划扫描、锁、状态流转、MQ 投递和排查顺序。 |
 
 ## 未完成且未提交到 GitHub
 
@@ -116,7 +117,8 @@ git checkout -b contribution-queue
 ## 最近提交
 
 ```text
-queue HEAD test: cover text cleanup utility behavior (queued)
+queue HEAD docs: explain knowledge schedule refresh lifecycle (queued)
+10fd402 test: cover text cleanup utility behavior (queued)
 ef30057 docs: add production deployment checklist (queued)
 8cc4825 test: cover LLM response cleaner behavior (queued)
 1a9bfe3 docs: add ingestion pipeline extension guide (queued)
@@ -165,7 +167,7 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-当前 Day 30 到 Day 42 已在本地 `contribution-queue` 做成独立 commit。下一步建议优先发布 Day 30：
+当前 Day 30 到 Day 43 已在本地 `contribution-queue` 做成独立 commit。下一步建议优先发布 Day 30：
 
 ```powershell
 ./publish_queued_commit.ps1 -DryRun

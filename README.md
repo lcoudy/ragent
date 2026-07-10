@@ -63,6 +63,7 @@ Ragent 是一个企业级 Agentic RAG 平台，覆盖从文档入库到智能问
 | 🔎 | <a href="./docs/rag-trace-reading-guide.md">RAG Trace 阅读指南</a> | 理解链路追踪采集、落库、查询接口和管理后台排查路径 |
 | 🧪 | <a href="./docs/retrieval-troubleshooting.md">检索排查指南</a> | 排查检索无结果、结果不准、Rerank 和向量库配置问题 |
 | 📚 | <a href="./docs/knowledge-base-operation-guide.md">知识库操作指南</a> | 理解知识库、文档、分块、定时刷新和管理后台入口 |
+| ⏱️ | <a href="./docs/knowledge-schedule-refresh-lifecycle.md">知识库定时刷新生命周期</a> | 理解计划扫描、锁、状态流转、MQ 投递和排查顺序 |
 | 📝 | <a href="./docs/resume-oriented-project-summary.md">项目简历复盘摘要</a> | 总结架构、核心链路、可讲亮点和后续改造方向 |
 | 🧰 | <a href="./docs/contribution-friendly-task-list.md">适合继续贡献的任务清单</a> | 按文档、测试、小型 bugfix、前端体验和后端 AI 工程分类后续任务 |
 | 🗓️ | <a href="./docs/release-and-contribution-workflow.md">发布与贡献流程指南</a> | 维护队列分支、每日发布脚本、检查命令和进度状态 |
