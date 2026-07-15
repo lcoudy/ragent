@@ -11,9 +11,9 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 44
+- 已完成贡献任务：Day 1 到 Day 45
 - 已完成并已正式提交到 GitHub：Day 1 到 Day 29
-- 已完成但未正式提交到 GitHub：Day 30 到 Day 44（仅在本地 `contribution-queue` 队列中）
+- 已完成但未正式提交到 GitHub：Day 30 到 Day 45（仅在本地 `contribution-queue` 队列中）
 - 未完成且未提交到 GitHub：暂无
 - 下一项任务：暂无；后续优先按天发布本地队列中的 Day 30
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
@@ -107,7 +107,8 @@ git checkout -b contribution-queue
 | 41 | Done | `ef30057` | `docs: add production deployment checklist` | 新增生产部署检查清单，覆盖环境基线、中间件、配置核对、发布验证、冒烟流程和回滚准备。 |
 | 42 | Done | `10fd402` | `test: cover text cleanup utility behavior` | 新增文本清理工具单元测试，覆盖空输入、BOM、行尾空白、连续空行和自定义清理开关。 |
 | 43 | Done | `481d63f` | `docs: explain knowledge schedule refresh lifecycle` | 新增知识库定时刷新生命周期说明，覆盖计划扫描、锁、状态流转、MQ 投递和排查顺序。 |
-| 44 | Done | `queue HEAD` | `test: cover chunking strategy factory behavior` | 新增分块策略工厂单元测试，覆盖策略注册、空类型、必选策略缺失和重复策略拒绝。 |
+| 44 | Done | `99d315b` | `test: cover chunking strategy factory behavior` | 新增分块策略工厂单元测试，覆盖策略注册、空类型、必选策略缺失和重复策略拒绝。 |
+| 45 | Done | `queue HEAD` | `docs: add RAG observability runbook` | 新增 RAG 运行观测 Runbook，覆盖日志、Trace、模型健康、检索结果、SSE 和工具调用排查。 |
 
 ## 未完成且未提交到 GitHub
 
@@ -118,7 +119,8 @@ git checkout -b contribution-queue
 ## 最近提交
 
 ```text
-queue HEAD test: cover chunking strategy factory behavior (queued)
+queue HEAD docs: add RAG observability runbook (queued)
+99d315b test: cover chunking strategy factory behavior (queued)
 481d63f docs: explain knowledge schedule refresh lifecycle (queued)
 10fd402 test: cover text cleanup utility behavior (queued)
 ef30057 docs: add production deployment checklist (queued)
@@ -169,7 +171,7 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-当前 Day 30 到 Day 44 已在本地 `contribution-queue` 做成独立 commit。下一步建议优先发布 Day 30：
+当前 Day 30 到 Day 45 已在本地 `contribution-queue` 做成独立 commit。下一步建议优先发布 Day 30：
 
 ```powershell
 ./publish_queued_commit.ps1 -DryRun
