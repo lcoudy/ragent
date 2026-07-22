@@ -61,6 +61,7 @@ Ragent 是一个企业级 Agentic RAG 平台，覆盖从文档入库到智能问
 | 🧵 | <a href="./docs/query-rewrite-term-mapping.md">问题改写与术语映射指南</a> | 理解术语归一化、LLM 改写、多问句拆分和缓存排查 |
 | 🗄️ | <a href="./docs/database-initialization.md">数据库初始化指南</a> | 初始化 PostgreSQL、pgvector、基础数据和版本升级脚本 |
 | 🧮 | <a href="./docs/vector-store-configuration.md">向量库配置指南</a> | 配置 pgvector、Milvus、向量维度和切换后的重建流程 |
+| 📨 | <a href="./docs/rocketmq-ingestion-operations.md">RocketMQ 入库异步处理指南</a> | 理解文档入库消息、事务、消费失败、重试和死信排查 |
 | 🔎 | <a href="./docs/rag-trace-reading-guide.md">RAG Trace 阅读指南</a> | 理解链路追踪采集、落库、查询接口和管理后台排查路径 |
 | 📈 | <a href="./docs/rag-observability-runbook.md">RAG 运行观测 Runbook</a> | 串联日志、Trace、模型健康、检索结果和工具调用排查 |
 | 🧪 | <a href="./docs/retrieval-troubleshooting.md">检索排查指南</a> | 排查检索无结果、结果不准、Rerank 和向量库配置问题 |
