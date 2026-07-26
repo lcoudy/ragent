@@ -11,9 +11,9 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 51
+- 已完成贡献任务：Day 1 到 Day 52
 - 已完成并已正式提交到 GitHub：Day 1 到 Day 29
-- 已完成但未正式提交到 GitHub：Day 30 到 Day 51（仅在本地 `contribution-queue` 队列中）
+- 已完成但未正式提交到 GitHub：Day 30 到 Day 52（仅在本地 `contribution-queue` 队列中）
 - 未完成且未提交到 GitHub：暂无
 - 下一项任务：暂无；后续优先按天发布本地队列中的 Day 30
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
@@ -115,7 +115,9 @@ git checkout -b contribution-queue
 | 49 | Done | `2471d55` | `docs: add RocketMQ ingestion operations guide` | 新增 RocketMQ 入库异步处理指南，覆盖消息职责、事务消息、消费失败、重试和死信排查。 |
 | 50 | Done | `5037c68` | `test: cover heuristic token counter behavior` | 新增启发式 Token 估算单元测试，覆盖空文本、英文、中文、其他字符和混合文本估算。 |
 
-| 51 | Done | `queue HEAD` | `docs: add SSE stream debugging guide` | 新增 SSE 流式响应调试指南，覆盖事件链路、连接中断、首包延迟、停止任务和浏览器联调。 |
+| 51 | Done | `777933e` | `docs: add SSE stream debugging guide` | 新增 SSE 流式响应调试指南，覆盖事件链路、连接中断、首包延迟、停止任务和浏览器联调。 |
+
+| 52 | Done | `queue HEAD` | `docs: add API error handling runbook` | 新增 API 错误处理 Runbook，覆盖响应解包、认证失效、参数错误、服务异常和敏感信息保护。 |
 
 ## 未完成且未提交到 GitHub
 
@@ -126,7 +128,8 @@ git checkout -b contribution-queue
 ## 最近提交
 
 ```text
-queue HEAD docs: add SSE stream debugging guide (queued)
+queue HEAD docs: add API error handling runbook (queued)
+777933e docs: add SSE stream debugging guide (queued)
 5037c68 test: cover heuristic token counter behavior (queued)
 2471d55 docs: add RocketMQ ingestion operations guide (queued)
 879a314 test: cover cron schedule helper behavior (queued)
@@ -184,7 +187,7 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-当前 Day 30 到 Day 51 已在本地 `contribution-queue` 做成独立 commit。下一步建议优先发布 Day 30：
+当前 Day 30 到 Day 52 已在本地 `contribution-queue` 做成独立 commit。下一步建议优先发布 Day 30：
 
 ```powershell
 ./publish_queued_commit.ps1 -DryRun
