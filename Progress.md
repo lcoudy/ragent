@@ -11,9 +11,9 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 54
+- 已完成贡献任务：Day 1 到 Day 55
 - 已完成并已正式提交到 GitHub：Day 1 到 Day 29
-- 已完成但未正式提交到 GitHub：Day 30 到 Day 54（仅在本地 `contribution-queue` 队列中）
+- 已完成但未正式提交到 GitHub：Day 30 到 Day 55（仅在本地 `contribution-queue` 队列中）
 - 未完成且未提交到 GitHub：暂无
 - 下一项任务：暂无；后续优先按天发布本地队列中的 Day 30
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
@@ -121,7 +121,9 @@ git checkout -b contribution-queue
 
 | 53 | Done | `3d5dab7` | `docs: add knowledge schedule operations guide` | 新增知识库调度运维指南，覆盖 Cron 校验、锁租约、执行状态、文件切换和失败恢复。 |
 
-| 54 | Done | `queue HEAD` | `docs: add MCP parameter debugging guide` | 新增 MCP 参数调试指南，覆盖工具发现、Schema、JSON 参数、类型不匹配和调用失败定位。 |
+| 54 | Done | `ccb980b` | `docs: add MCP parameter debugging guide` | 新增 MCP 参数调试指南，覆盖工具发现、Schema、JSON 参数、类型不匹配和调用失败定位。 |
+
+| 55 | Done | `queue HEAD` | `docs: add model health operations guide` | 新增模型健康运维指南，覆盖候选状态、失败计数、恢复探测、路由降级和告警指标。 |
 
 ## 未完成且未提交到 GitHub
 
@@ -132,7 +134,8 @@ git checkout -b contribution-queue
 ## 最近提交
 
 ```text
-queue HEAD docs: add MCP parameter debugging guide (queued)
+queue HEAD docs: add model health operations guide (queued)
+ccb980b docs: add MCP parameter debugging guide (queued)
 3d5dab7 docs: add knowledge schedule operations guide (queued)
 2619fe8 docs: add API error handling runbook (queued)
 777933e docs: add SSE stream debugging guide (queued)
@@ -193,7 +196,7 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-当前 Day 30 到 Day 54 已在本地 `contribution-queue` 做成独立 commit。下一步建议优先发布 Day 30：
+当前 Day 30 到 Day 55 已在本地 `contribution-queue` 做成独立 commit。下一步建议优先发布 Day 30：
 
 ```powershell
 ./publish_queued_commit.ps1 -DryRun
