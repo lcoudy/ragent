@@ -11,9 +11,9 @@
 - 远程仓库：`https://github.com/lcoudy/ragent.git`
 - GitHub 用户名：`lcoudy`
 - Git 作者邮箱：`1020246530@qq.com`
-- 已完成贡献任务：Day 1 到 Day 56
+- 已完成贡献任务：Day 1 到 Day 57
 - 已完成并已正式提交到 GitHub：Day 1 到 Day 29
-- 已完成但未正式提交到 GitHub：Day 30 到 Day 56（仅在本地 `contribution-queue` 队列中）
+- 已完成但未正式提交到 GitHub：Day 30 到 Day 57（仅在本地 `contribution-queue` 队列中）
 - 未完成且未提交到 GitHub：暂无
 - 下一项任务：暂无；后续优先按天发布本地队列中的 Day 30
 - 开始新任务前的工作区预期：干净；如果用户明确要求继续未提交改动，则按用户要求处理
@@ -125,7 +125,9 @@ git checkout -b contribution-queue
 
 | 55 | Done | `687354b` | `docs: add model health operations guide` | 新增模型健康运维指南，覆盖候选状态、失败计数、恢复探测、路由降级和告警指标。 |
 
-| 56 | Done | `queue HEAD` | `docs: add ingestion retry guide` | 新增入库重试指南，覆盖幂等边界、失败阶段、消息重试、临时文件和人工补偿。 |
+| 56 | Done | `b1a66ee` | `docs: add ingestion retry guide` | 新增入库重试指南，覆盖幂等边界、失败阶段、消息重试、临时文件和人工补偿。 |
+
+| 57 | Done | `queue HEAD` | `docs: add retrieval score debugging guide` | 新增检索评分调试指南，覆盖多通道分数、去重、Rerank、topK 和结果解释。 |
 
 ## 未完成且未提交到 GitHub
 
@@ -136,7 +138,8 @@ git checkout -b contribution-queue
 ## 最近提交
 
 ```text
-queue HEAD docs: add ingestion retry guide (queued)
+queue HEAD docs: add retrieval score debugging guide (queued)
+b1a66ee docs: add ingestion retry guide (queued)
 687354b docs: add model health operations guide (queued)
 ccb980b docs: add MCP parameter debugging guide (queued)
 3d5dab7 docs: add knowledge schedule operations guide (queued)
@@ -199,7 +202,7 @@ edad60d docs: add ingestion pipeline troubleshooting notes
 
 ## 下一次执行说明
 
-当前 Day 30 到 Day 56 已在本地 `contribution-queue` 做成独立 commit。下一步建议优先发布 Day 30：
+当前 Day 30 到 Day 57 已在本地 `contribution-queue` 做成独立 commit。下一步建议优先发布 Day 30：
 
 ```powershell
 ./publish_queued_commit.ps1 -DryRun
