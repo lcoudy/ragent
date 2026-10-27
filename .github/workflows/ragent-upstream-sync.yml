@@ -1,0 +1,71 @@
+name: Sync Ragent upstream (preserve history)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 */3 * * *'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ragent-upstream-sync.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ragent-upstream-sync-main
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'lcoudy/ragent'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out complete history
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Integrate latest upstream and retain this sync workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          export GIT_TERMINAL_PROMPT=0
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          previous_main="$(git rev-parse HEAD)"
+          git remote add upstream https://github.com/nageoffer/ragent.git
+          git fetch --no-tags upstream main
+          upstream_sha="$(git rev-parse upstream/main)"
+
+          if git merge-base --is-ancestor "$upstream_sha" HEAD; then
+            echo "Already current at upstream $upstream_sha; no commit required."
+            exit 0
+          fi
+
+          # Keep the old main history and the upstream history as merge parents.
+          # The source tree is the upstream snapshot except the trusted sync workflow.
+          cp .github/workflows/ragent-upstream-sync.yml "$RUNNER_TEMP/ragent-upstream-sync.yml"
+          git merge -s ours --no-commit --no-ff upstream/main
+          git read-tree --reset -u "$upstream_sha"
+
+          # Do not execute or retain workflow definitions supplied by upstream.
+          rm -rf .github/workflows
+          mkdir -p .github/workflows
+          cp "$RUNNER_TEMP/ragent-upstream-sync.yml" .github/workflows/ragent-upstream-sync.yml
+          git add -A
+          git commit -m "chore(sync): update Ragent from nageoffer upstream"
+
+          # Verify exact source alignment apart from the automation file.
+          git diff --exit-code --quiet "$upstream_sha" HEAD -- . ':(exclude).github/workflows'
+          test "$(find .github/workflows -type f | wc -l)" -eq 1
+          git merge-base --is-ancestor "$previous_main" HEAD
+          git merge-base --is-ancestor "$upstream_sha" HEAD
+
+          # Never rewrite public Git history.
+          git push origin HEAD:refs/heads/main
+          echo "Synchronized to upstream $upstream_sha while preserving previous history."
