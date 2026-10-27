@@ -44,6 +44,16 @@ public enum ModelProvider {
     SILICON_FLOW("siliconflow"),
 
     /**
+     * 推理时代 AI 模型服务
+     */
+    AI_HUB_MIX("aihubmix"),
+
+    /**
+     * DeepSeek 官方开放平台
+     */
+    DEEP_SEEK("deepseek"),
+
+    /**
      * 空实现，用于测试或占位
      */
     NOOP("noop");

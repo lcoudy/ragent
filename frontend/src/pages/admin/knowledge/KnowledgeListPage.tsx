@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
+import { RelativeTime } from "@/components/RelativeTime";
 import {
   Table,
   TableBody,
@@ -63,7 +64,7 @@ export function KnowledgeListPage() {
 
   const knowledgeBases = pageData?.records || [];
 
-  const loadKnowledgeBases = async (current = pageNo, name = keyword) => {
+  const loadKnowledgeBases = useCallback(async (current = pageNo, name = keyword) => {
     try {
       setLoading(true);
       const data = await getKnowledgeBasesPage(current, PAGE_SIZE, name || undefined);
@@ -74,7 +75,7 @@ export function KnowledgeListPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [keyword, pageNo]);
 
   const loadStats = useCallback(async (name = keyword) => {
     const requestId = ++statsRequestId.current;
@@ -137,7 +138,7 @@ export function KnowledgeListPage() {
 
   useEffect(() => {
     loadKnowledgeBases();
-  }, [pageNo, keyword]);
+  }, [loadKnowledgeBases]);
 
   useEffect(() => {
     loadStats(keyword);
@@ -185,11 +186,6 @@ export function KnowledgeListPage() {
     } finally {
       setDeleteTarget(null);
     }
-  };
-
-  const formatDate = (dateStr?: string) => {
-    if (!dateStr) return "-";
-    return new Date(dateStr).toLocaleString("zh-CN");
   };
 
   const formatStatValue = (value: number) => {
@@ -350,11 +346,11 @@ export function KnowledgeListPage() {
                     </TableCell>
                     <TableCell>{kb.documentCount ?? "-"}</TableCell>
                     <TableCell>{kb.createdBy || "-"}</TableCell>
-                    <TableCell className="text-muted-foreground">
-                      {formatDate(kb.createTime)}
+                    <TableCell>
+                      <RelativeTime value={kb.createTime} />
                     </TableCell>
-                    <TableCell className="text-muted-foreground">
-                      {formatDate(kb.updateTime)}
+                    <TableCell>
+                      <RelativeTime value={kb.updateTime} />
                     </TableCell>
                     <TableCell className="text-center">
                       <div className="flex justify-center gap-2">

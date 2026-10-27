@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Pencil, Plus, RefreshCw, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -40,6 +40,7 @@ import {
   updateQueryTermMapping
 } from "@/services/queryTermMappingService";
 import { getErrorMessage } from "@/utils/error";
+import { RelativeTime } from "@/components/RelativeTime";
 
 const PAGE_SIZE = 10;
 
@@ -77,7 +78,7 @@ export function QueryTermMappingPage() {
   }>({ open: false, mode: "create", item: null });
   const [form, setForm] = useState(emptyForm);
 
-  const loadData = async (current = pageNo, keywordValue = keyword) => {
+  const loadData = useCallback(async (current = pageNo, keywordValue = keyword) => {
     try {
       setLoading(true);
       const data = await getQueryTermMappingsPage(current, PAGE_SIZE, keywordValue || undefined);
@@ -88,11 +89,11 @@ export function QueryTermMappingPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [keyword, pageNo]);
 
   useEffect(() => {
     loadData();
-  }, [pageNo, keyword]);
+  }, [loadData]);
 
   useEffect(() => {
     if (!dialogState.open) {
@@ -112,11 +113,6 @@ export function QueryTermMappingPage() {
     }
     setForm(emptyForm);
   }, [dialogState]);
-
-  const formatDate = (dateStr?: string | null) => {
-    if (!dateStr) return "-";
-    return new Date(dateStr).toLocaleString("zh-CN");
-  };
 
   const handleSearch = () => {
     setPageNo(1);
@@ -265,11 +261,11 @@ export function QueryTermMappingPage() {
                     <TableCell className="max-w-[160px] truncate text-muted-foreground" title={item.remark || ""}>
                       {item.remark || "-"}
                     </TableCell>
-                    <TableCell className="text-muted-foreground">
-                      {formatDate(item.createTime)}
+                    <TableCell>
+                      <RelativeTime value={item.createTime} />
                     </TableCell>
-                    <TableCell className="text-muted-foreground">
-                      {formatDate(item.updateTime)}
+                    <TableCell>
+                      <RelativeTime value={item.updateTime} />
                     </TableCell>
                     <TableCell className="text-center">
                       <div className="flex justify-center gap-2">

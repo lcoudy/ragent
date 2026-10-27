@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CircleHelp, PenSquare, Plus, RefreshCw, ShieldCheck, ShieldX, Trash2 } from "lucide-react";
 import { toast } from "sonner";
@@ -13,6 +13,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { RelativeTime } from "@/components/RelativeTime";
 
 import type { KnowledgeChunk, KnowledgeDocument, PageResult } from "@/services/knowledgeService";
 import {
@@ -22,6 +23,7 @@ import {
   toggleChunk,
   getChunksPage,
   getDocument,
+  getKnowledgeBase,
   updateChunk
 } from "@/services/knowledgeService";
 import { getErrorMessage } from "@/utils/error";
@@ -34,19 +36,13 @@ const truncateText = (value?: string | null, max = 120) => {
   return `${value.slice(0, max)}...`;
 };
 
-const formatDate = (value?: string | null) => {
-  if (!value) return "-";
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return value;
-  return date.toLocaleString("zh-CN");
-};
-
 const enabledLabel = (enabled?: number | null) => (enabled === 1 ? "启用" : "禁用");
 
 export function KnowledgeChunksPage() {
   const { kbId, docId } = useParams();
   const navigate = useNavigate();
   const [doc, setDoc] = useState<KnowledgeDocument | null>(null);
+  const [kbName, setKbName] = useState("");
   const [pageData, setPageData] = useState<PageResult<KnowledgeChunk> | null>(null);
   const [pageNo, setPageNo] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -62,7 +58,7 @@ export function KnowledgeChunksPage() {
 
   const selectedList = useMemo(() => Array.from(selectedIds), [selectedIds]);
 
-  const loadDocument = async () => {
+  const loadDocument = useCallback(async () => {
     if (!docId) return;
     try {
       const data = await getDocument(docId);
@@ -71,9 +67,9 @@ export function KnowledgeChunksPage() {
       toast.error(getErrorMessage(error, "加载文档失败"));
       console.error(error);
     }
-  };
+  }, [docId]);
 
-  const loadChunks = async (current = pageNo, enabled = enabledFilter) => {
+  const loadChunks = useCallback(async (current = pageNo, enabled = enabledFilter) => {
     if (!docId) return;
     setLoading(true);
     try {
@@ -89,15 +85,21 @@ export function KnowledgeChunksPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [docId, enabledFilter, pageNo]);
 
   useEffect(() => {
     loadDocument();
-  }, [docId]);
+  }, [loadDocument]);
+
+  useEffect(() => {
+    if (kbId) {
+      getKnowledgeBase(kbId).then(kb => setKbName(kb.name)).catch(() => {});
+    }
+  }, [kbId]);
 
   useEffect(() => {
     loadChunks();
-  }, [docId, pageNo, enabledFilter]);
+  }, [loadChunks]);
 
   useEffect(() => {
     setSelectedIds(new Set());
@@ -183,11 +185,11 @@ export function KnowledgeChunksPage() {
         <div>
           <h1 className="admin-page-title">分块管理</h1>
           <p className="admin-page-subtitle">
-            {doc?.docName || docId} {kbId ? `（知识库: ${kbId}）` : ""}
+            {doc?.docName || docId} {kbName ? `（知识库: ${kbName}）` : ""}
           </p>
         </div>
         <div className="admin-page-actions">
-          <Button variant="outline" onClick={() => navigate(`/admin/knowledge/${kbId}`)}>
+          <Button variant="outline" onClick={() => navigate(-1)}>
             返回文档
           </Button>
           <Button className="admin-primary-gradient" onClick={() => setCreateOpen(true)}>
@@ -298,7 +300,7 @@ export function KnowledgeChunksPage() {
                     </TableCell>
                     <TableCell>{chunk.charCount ?? "-"}</TableCell>
                     <TableCell>{chunk.tokenCount ?? "-"}</TableCell>
-                    <TableCell>{formatDate(chunk.updateTime)}</TableCell>
+                    <TableCell><RelativeTime value={chunk.updateTime} /></TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
                         <Button size="sm" variant="outline" onClick={() => setEditDialog({ open: true, chunk })}>

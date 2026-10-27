@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
   ClipboardList,
@@ -47,6 +47,7 @@ import {
 } from "@/services/ingestionService";
 import { getSystemSettings } from "@/services/settingsService";
 import { getErrorMessage } from "@/utils/error";
+import { RelativeTime } from "@/components/RelativeTime";
 const PIPELINE_PAGE_SIZE = 10;
 const TASK_PAGE_SIZE = 10;
 
@@ -60,8 +61,7 @@ const STATUS_OPTIONS = [
 const SOURCE_OPTIONS = [
   { value: "file", label: "Local File" },
   { value: "url", label: "Remote URL" },
-  { value: "feishu", label: "Feishu" },
-  { value: "s3", label: "S3" }
+  { value: "feishu", label: "Feishu" }
 ];
 
 const NODE_TYPE_OPTIONS = [
@@ -242,7 +242,7 @@ export function IngestionPage() {
   const pipelines = pipelinePage?.records || [];
   const tasks = taskPage?.records || [];
 
-  const loadPipelines = async (pageNo = pipelinePageNo, keyword = pipelineKeyword) => {
+  const loadPipelines = useCallback(async (pageNo = pipelinePageNo, keyword = pipelineKeyword) => {
     setPipelineLoading(true);
     try {
       const data = await getIngestionPipelines(pageNo, PIPELINE_PAGE_SIZE, keyword || undefined);
@@ -253,7 +253,7 @@ export function IngestionPage() {
     } finally {
       setPipelineLoading(false);
     }
-  };
+  }, [pipelineKeyword, pipelinePageNo]);
 
   const loadPipelineOptions = async () => {
     try {
@@ -264,7 +264,7 @@ export function IngestionPage() {
     }
   };
 
-  const loadTasks = async (pageNo = taskPageNo, status = taskStatus) => {
+  const loadTasks = useCallback(async (pageNo = taskPageNo, status = taskStatus) => {
     setTaskLoading(true);
     try {
       const data = await getIngestionTasks(pageNo, TASK_PAGE_SIZE, status);
@@ -275,15 +275,15 @@ export function IngestionPage() {
     } finally {
       setTaskLoading(false);
     }
-  };
+  }, [taskPageNo, taskStatus]);
 
   useEffect(() => {
     loadPipelines();
-  }, [pipelinePageNo, pipelineKeyword]);
+  }, [loadPipelines]);
 
   useEffect(() => {
     loadTasks();
-  }, [taskPageNo, taskStatus]);
+  }, [loadTasks]);
 
   useEffect(() => {
     loadPipelineOptions();
@@ -431,7 +431,7 @@ export function IngestionPage() {
                       </TableCell>
                       <TableCell>{pipeline.nodes?.length ?? 0}</TableCell>
                       <TableCell>{pipeline.createdBy || "-"}</TableCell>
-                      <TableCell>{formatDate(pipeline.updateTime)}</TableCell>
+                      <TableCell><RelativeTime value={pipeline.updateTime} /></TableCell>
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
                           <Button size="sm" variant="outline" onClick={() => openPipelineNodes(pipeline)}>
@@ -554,7 +554,7 @@ export function IngestionPage() {
                       </TableCell>
                       <TableCell>{task.createdBy || "-"}</TableCell>
                       <TableCell>{task.chunkCount ?? "-"}</TableCell>
-                      <TableCell>{formatDate(task.createTime)}</TableCell>
+                      <TableCell><RelativeTime value={task.createTime} /></TableCell>
                       <TableCell className="text-right">
                         <Button size="sm" variant="outline" onClick={() => setTaskDetail({ open: true, taskId: task.id })}>
                           查看详情
@@ -992,7 +992,7 @@ function PipelineDialog({ open, mode, pipeline, onOpenChange, onSubmit }: Pipeli
       setNodes(buildNodesFromPipeline(pipeline?.nodes));
       setNodeMode("form");
     }
-  }, [open, pipeline, defaultNodes, form]);
+  }, [open, pipeline, defaultNodes, form]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = async (values: PipelineFormValues) => {
     let nodesPayload: IngestionPipelinePayload["nodes"] | undefined;
@@ -1864,12 +1864,6 @@ function TaskDialog({ open, pipelineOptions, onOpenChange, onSubmit, onUpload }:
           locationHint: "填写飞书文档链接",
           credentialsHint: '{"tenantAccessToken":"..."} 或 {"app_id":"...","app_secret":"..."}'
         };
-      case "s3":
-        return {
-          locationPlaceholder: "s3://bucket/key",
-          locationHint: "填写 S3 路径，例如 s3://biz/file.md",
-          credentialsHint: ""
-        };
       case "url":
       default:
         return {
@@ -1980,7 +1974,7 @@ function TaskDialog({ open, pipelineOptions, onOpenChange, onSubmit, onUpload }:
       <DialogContent className="max-h-[90vh] overflow-y-auto sidebar-scroll sm:max-w-[720px]">
         <DialogHeader>
           <DialogTitle>新建通道任务</DialogTitle>
-          <DialogDescription>支持 Local File / URL / Feishu / S3 来源，Local File 会直接上传文件</DialogDescription>
+          <DialogDescription>支持 Local File / URL / Feishu 来源，Local File 会直接上传文件</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(handleSubmit)}>

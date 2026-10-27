@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Pencil, Plus, RefreshCw, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -33,6 +33,7 @@ import {
   updateSampleQuestion
 } from "@/services/sampleQuestionService";
 import { getErrorMessage } from "@/utils/error";
+import { RelativeTime } from "@/components/RelativeTime";
 
 const PAGE_SIZE = 10;
 
@@ -56,7 +57,7 @@ export function SampleQuestionPage() {
   }>({ open: false, mode: "create", item: null });
   const [form, setForm] = useState(emptyForm);
 
-  const loadQuestions = async (current = pageNo, keywordValue = keyword) => {
+  const loadQuestions = useCallback(async (current = pageNo, keywordValue = keyword) => {
     try {
       setLoading(true);
       const data = await getSampleQuestionsPage(current, PAGE_SIZE, keywordValue || undefined);
@@ -67,11 +68,11 @@ export function SampleQuestionPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [keyword, pageNo]);
 
   useEffect(() => {
     loadQuestions();
-  }, [pageNo, keyword]);
+  }, [loadQuestions]);
 
   useEffect(() => {
     if (!dialogState.open) {
@@ -88,11 +89,6 @@ export function SampleQuestionPage() {
     }
     setForm(emptyForm);
   }, [dialogState]);
-
-  const formatDate = (dateStr?: string | null) => {
-    if (!dateStr) return "-";
-    return new Date(dateStr).toLocaleString("zh-CN");
-  };
 
   const handleSearch = () => {
     setPageNo(1);
@@ -221,7 +217,7 @@ export function SampleQuestionPage() {
                       {item.question}
                     </TableCell>
                     <TableCell className="text-muted-foreground">
-                      {formatDate(item.updateTime || item.createTime)}
+                      <RelativeTime value={item.updateTime || item.createTime} />
                     </TableCell>
                     <TableCell className="text-center">
                       <div className="flex justify-end gap-2">
