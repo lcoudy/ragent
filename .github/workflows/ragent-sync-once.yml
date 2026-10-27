@@ -1,0 +1,64 @@
+name: One-time Ragent upstream sync (preserve history)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/ragent-sync-once.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-ragent-upstream-merge
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'lcoudy/ragent'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out full local history
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Merge upstream ancestry and align entire source tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          original_sha="$(git rev-parse HEAD)"
+          expected_backup="b499dadff06e4c2515a6bc81646b97e7a6b8985b"
+          backup_sha="$(git ls-remote --heads origin refs/heads/backup/pre-upstream-sync-20261027 | awk '{print $1}')"
+          if [ "$backup_sha" != "$expected_backup" ]; then
+            echo "::error::Backup ref is missing or does not match original head."
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add upstream https://github.com/nageoffer/ragent.git
+          git fetch --no-tags upstream main
+          upstream_sha="$(git rev-parse upstream/main)"
+
+          # This keeps the entire existing main history and upstream history.
+          # No force push or old commit rewriting.
+          git merge -s ours --no-commit --no-ff --allow-unrelated-histories upstream/main
+          # Replace the complete tracked file tree with the upstream snapshot,
+          # including removal of temporary workflow and old personal filler docs.
+          git read-tree --reset -u upstream/main
+          git commit -m "chore(sync): align Ragent source with upstream, preserve original history"
+
+          test "$(git rev-parse 'HEAD^{tree}')" = "$(git rev-parse 'upstream/main^{tree}')"
+          git merge-base --is-ancestor "$original_sha" HEAD
+          git merge-base --is-ancestor "$upstream_sha" HEAD
+          echo "Old head: $original_sha"
+          echo "Upstream: $upstream_sha"
+          echo "New head: $(git rev-parse HEAD)"
+          git push origin HEAD:refs/heads/main
+
+          echo "Verified: source tree equals upstream; old main and upstream histories preserved."
